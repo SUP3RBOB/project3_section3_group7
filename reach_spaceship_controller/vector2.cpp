@@ -25,15 +25,11 @@ Vector2 Vector2::Normalized() {
 }
 
 Vector2 Vector2::operator +(Vector2& other) {
-    X += other.X;
-    Y += other.Y;
-    return Vector2(X, Y);
+    return Vector2(X + other.X, Y + other.Y);
 }
 
 Vector2 Vector2::operator -(Vector2& other) {
-    X -= other.X;
-    Y -= other.Y;
-    return Vector2(X, Y);
+    return Vector2(X - other.X, Y - other.Y);
 }
 
 Vector2& Vector2::operator +=(Vector2& other) {
@@ -49,9 +45,7 @@ Vector2& Vector2::operator -=(Vector2& other) {
 }
 
 Vector2 Vector2::operator *(float scalar) {
-    X *= scalar;
-    Y *= scalar;
-    return Vector2(X, Y);
+    return Vector2(X * scalar, Y * scalar);
 }
 
 Vector2& Vector2::operator *=(float scalar) {
