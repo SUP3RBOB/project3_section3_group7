@@ -29,8 +29,7 @@ public:
     Vector2 operator -(Vector2& other);
     Vector2& operator +=(Vector2& other);
     Vector2& operator -=(Vector2& other);
-    Vector2 extracted();
-    Vector2 operator*(float scalar);
+    Vector2 operator *(float scalar);
     Vector2& operator *=(float scalar);
     Vector2& operator =(Vector2& other);
     bool operator ==(const Vector2& other) const;
