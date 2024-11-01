@@ -10,12 +10,15 @@ CONFIG += c++17
 
 SOURCES += \
     comms.cpp \
+    lights.cpp \
     main.cpp \
     mainwindow.cpp \
     vector2.cpp
 
 HEADERS += \
     comms.h \
+    Lights.h \
+    isavable.h \
     mainwindow.h \
     vector2.h
 
