@@ -16,6 +16,7 @@ SOURCES += \
 
 HEADERS += \
     Lights.h \
+    isavable.h \
     mainwindow.h \
     vector2.h
 
