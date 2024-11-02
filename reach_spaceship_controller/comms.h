@@ -3,8 +3,9 @@
 
 #include <QObject>
 #include <QList>
+#include "isavable.h"
 
-class Communication : public QObject {
+class Communication : public QObject, public ISavable {
 private:
     Q_OBJECT
 
@@ -12,12 +13,26 @@ private:
     QList<QString> messagesToReceive;
 
 public:
-    // Creates a new communication class
+    /// Creates a new communication class.
     Communication();
 
+    /// Messages that have been received.
+    QList<QString> MessagesReceived;
+
+    /// Receive a random communication message.
     void ReceiveRandomMessage();
+
+    /// Whether the comms can receive messages or not.
     bool CanReceiveMessages();
+
+    /// Enable.disable the ability to receive messages.
     void ToggleReceiveMessages();
+
+    /// Saves received messages to a file.
+    virtual void Save(QString fileName) override;
+
+    /// Loads messages from a file into the list of received messages.
+    virtual void Load(QString fileName) override;
 
 signals:
 
