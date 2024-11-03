@@ -16,6 +16,8 @@ public:
     /// Creates a new communication class.
     Communication();
 
+    ~Communication();
+
     /// Messages that have been received.
     QList<QString> MessagesReceived;
 
