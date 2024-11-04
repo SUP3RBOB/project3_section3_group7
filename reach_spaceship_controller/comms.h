@@ -5,6 +5,7 @@
 #include <QList>
 #include "isavable.h"
 
+/// The communication module of the spaceship.
 class Communication : public QObject, public ISavable {
 private:
     Q_OBJECT
