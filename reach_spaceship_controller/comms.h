@@ -40,7 +40,7 @@ public:
 signals:
 
     /// Invoked when a new message is received.
-    void MessageReceived(QString message);
+    void OnMessageReceived(QString message);
 };
 
 #endif // COMMS_H

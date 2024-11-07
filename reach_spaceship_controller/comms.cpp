@@ -35,7 +35,7 @@ void Communication::ReceiveRandomMessage() {
         QString message = QString(messagesToReceive[num]);
 
         MessagesReceived.push_back(message);
-        emit MessageReceived(message);
+        emit OnMessageReceived(message);
         messagesToReceive.removeAt(num);
     }
 }

@@ -5,7 +5,7 @@ class Comms_Tests : public QObject {
     Q_OBJECT
 private:
     QString emittedMessage = "Blank Message";
-    void OnReceivedMessage(QString message);
+    void ReceivedMessage(QString message);
 
 public:
     Comms_Tests();
@@ -38,7 +38,7 @@ void Comms_Tests::ReceiveRandomMessage_AddsMessageToReceivedList() {
 void Comms_Tests::ReceiveRandomMessage_EmitsMessageReceivedSignal() {
     // Arrange
     Communication comms = Communication();
-    connect(&comms, &Communication::MessageReceived, this, &Comms_Tests::OnReceivedMessage);
+    connect(&comms, &Communication::OnMessageReceived, this, &Comms_Tests::OnReceivedMessage);
 
     // Act
     comms.ReceiveRandomMessage();
@@ -107,7 +107,7 @@ void Comms_Tests::Load_LoadsMessagesIntoList() {
     }
 }
 
-void Comms_Tests::OnReceivedMessage(QString message) {
+void Comms_Tests::ReceivedMessage(QString message) {
     emittedMessage = message;
 }
 
