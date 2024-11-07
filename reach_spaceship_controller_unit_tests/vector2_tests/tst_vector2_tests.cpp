@@ -40,7 +40,7 @@ void Vector2_Tests::Magnitude_WithNormalizedVector_Returns1() {
     float actual = vec.Magnitude();
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::Magnitude_WithNonNormalizedVector_ReturnsLength() {
@@ -52,7 +52,7 @@ void Vector2_Tests::Magnitude_WithNonNormalizedVector_ReturnsLength() {
     float actual = vec.Magnitude();
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::Distance_WithDifferentPoints_ReturnsDistance() {
@@ -65,7 +65,7 @@ void Vector2_Tests::Distance_WithDifferentPoints_ReturnsDistance() {
     float actual = start.Distance(end);
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::Distance_WithSamePoints_Returns0() {
@@ -78,7 +78,7 @@ void Vector2_Tests::Distance_WithSamePoints_Returns0() {
     float actual = start.Distance(end);
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::Normalized_WithNonNormalizedVector_ReturnsNormalizedVector() {
@@ -90,7 +90,7 @@ void Vector2_Tests::Normalized_WithNonNormalizedVector_ReturnsNormalizedVector()
     Vector2 actual = vec.Normalized();
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::Normalized_WithNormalizedVector_ReturnsSame() {
@@ -102,7 +102,7 @@ void Vector2_Tests::Normalized_WithNormalizedVector_ReturnsSame() {
     Vector2 actual = vec.Normalized();
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::OperatorPlus_AddsToVector() {
@@ -115,7 +115,7 @@ void Vector2_Tests::OperatorPlus_AddsToVector() {
     Vector2 actual = vec + add;
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::OperatorMinus_SubtractsFromVector() {
@@ -128,7 +128,7 @@ void Vector2_Tests::OperatorMinus_SubtractsFromVector() {
     Vector2 actual = vec - sub;
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::OperatorPlusEquals_AddsToVector() {
@@ -141,7 +141,7 @@ void Vector2_Tests::OperatorPlusEquals_AddsToVector() {
     vec += add;
 
     // Assert
-    QCOMPARE(expected, vec);
+    QCOMPARE(vec, expected);
 }
 
 void Vector2_Tests::OperatorMinusEquals_SubtractsFromVector() {
@@ -154,7 +154,7 @@ void Vector2_Tests::OperatorMinusEquals_SubtractsFromVector() {
     vec -= sub;
 
     // Assert
-    QCOMPARE(expected, vec);
+    QCOMPARE(vec, expected);
 }
 
 void Vector2_Tests::OperatorMultiply_WithFloatAfter_ScalesVector() {
@@ -167,7 +167,7 @@ void Vector2_Tests::OperatorMultiply_WithFloatAfter_ScalesVector() {
     Vector2 actual = vec * scale;
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::OperatorMultiply_WithFloatBefore_ScalesVector() {
@@ -180,7 +180,7 @@ void Vector2_Tests::OperatorMultiply_WithFloatBefore_ScalesVector() {
     Vector2 actual = scale * vec;
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected);
 }
 
 void Vector2_Tests::OperatorMultiplyEquals_WithFloat_ScalesVector() {
@@ -193,7 +193,7 @@ void Vector2_Tests::OperatorMultiplyEquals_WithFloat_ScalesVector() {
     vec *= scale;
 
     // Assert
-    QCOMPARE(expected, vec);
+    QCOMPARE(vec, expected);
 }
 
 QTEST_APPLESS_MAIN(Vector2_Tests)
