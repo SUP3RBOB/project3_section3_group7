@@ -26,7 +26,7 @@ void ExampleTestClass::ExampleTest_Compare() {
     int actual = 2 + 3;
 
     // Assert
-    QCOMPARE(expected, actual);
+    QCOMPARE(actual, expected); // MAKE SURE YOU COMPARE IN THIS ORDER: (Actual, Expected). Actual must come before expected.
 }
 
 // Example test case for verifying values (boolean)
