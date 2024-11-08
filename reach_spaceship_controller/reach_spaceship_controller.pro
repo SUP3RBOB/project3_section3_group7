@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     comms.cpp \
     hull.cpp \
+    lifesupport.cpp \
     lights.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -21,6 +22,7 @@ HEADERS += \
     Lights.h \
     hull.h \
     isavable.h \
+    lifesupport.h \
     mainwindow.h \
     vector2.h
 
