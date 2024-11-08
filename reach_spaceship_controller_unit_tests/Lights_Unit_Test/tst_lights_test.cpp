@@ -14,6 +14,8 @@ public:
 private slots:
     void Lights_TurnOff();
     void Lights_TurnOn();
+    void Save();
+    void Load();
 
 };
 
@@ -31,6 +33,40 @@ void Lights_Test::Lights_TurnOn() {
     Lights lights = Lights();
     lights.turnOn();
     QCOMPARE(true,lights.isOn());
+}
+
+void Lights_Test::Save(){
+    Lights light = Lights();
+
+    // Act
+    light.Save("light.txt");
+
+    // Assert
+    QVERIFY(QFileInfo::exists("light.txt"));
+
+    // Cleanup
+    if (QFileInfo::exists("light.txt")) {
+        QFile::remove("light.txt");
+    }
+}
+
+void Lights_Test::Load(){
+    Lights light = Lights();
+    bool expectedValue = true;
+    light.turnOn();
+    light.Save("light.txt");
+    light.turnOff();
+
+    // Act
+    light.Load("light.txt");
+
+    // Assert
+    QCOMPARE(light.isOn(), expectedValue);
+
+    // Cleanup
+    if (QFileInfo::exists("light.txt")) {
+        QFile::remove("light.txt");
+    }
 }
 
 QTEST_APPLESS_MAIN(Lights_Test)
