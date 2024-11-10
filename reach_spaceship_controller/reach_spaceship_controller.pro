@@ -15,6 +15,7 @@ SOURCES += \
     lights.cpp \
     main.cpp \
     mainwindow.cpp \
+    power.cpp \
     vector2.cpp
 
 HEADERS += \
@@ -24,6 +25,7 @@ HEADERS += \
     isavable.h \
     lifesupport.h \
     mainwindow.h \
+    power.h \
     vector2.h
 
 FORMS += \
