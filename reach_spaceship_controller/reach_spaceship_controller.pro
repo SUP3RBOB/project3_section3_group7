@@ -16,6 +16,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     power.cpp \
+    spaceship.cpp \
     vector2.cpp
 
 HEADERS += \
@@ -26,6 +27,7 @@ HEADERS += \
     lifesupport.h \
     mainwindow.h \
     power.h \
+    spaceship.h \
     vector2.h
 
 FORMS += \

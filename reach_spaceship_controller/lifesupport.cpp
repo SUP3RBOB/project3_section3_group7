@@ -5,6 +5,11 @@
 
 using namespace Qt;
 
+LifeSupport::LifeSupport() {
+    this->oxygen = 0.f;
+    this->temperature = 0.f;
+}
+
 LifeSupport::LifeSupport(float oxygen, float temperature) {
     this->oxygen = oxygen;
     this->temperature = temperature;

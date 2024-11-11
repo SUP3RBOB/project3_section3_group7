@@ -7,6 +7,8 @@
 // the on/off status to false (off) by default.
 Power::Power(float initialPower) : power(initialPower), on(false) {}
 
+Power::~Power() { }
+
 // Returns the current power level.
 float Power::GetPower() const {
     return power;
@@ -25,6 +27,7 @@ void Power::SetPower(float level) {
 // Sets the power on/off status to the specified value (true for on, false for off).
 void Power::SetOn(bool status) {
     on = status;
+    emit OnPowerActivated(on);
 }
 
 // Saves the current state of the Power module (on/off status and power level) to a file.
