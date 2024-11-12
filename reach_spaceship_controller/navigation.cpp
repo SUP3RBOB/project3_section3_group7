@@ -14,6 +14,10 @@ Navigation::Navigation() {
     Acceleration = QVector2D();
 }
 
+Navigation::~Navigation() {
+
+}
+
 void Navigation::ApplyThrust(float mass, float deltaTime) {
     Direction.setX(0.f);
     Direction.setY(0.f);
