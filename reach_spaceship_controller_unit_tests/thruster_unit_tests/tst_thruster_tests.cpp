@@ -13,7 +13,7 @@ public:
 private slots:
     void SetThrust_ToAnyValue_SetsThrust();
     void Save_CreatesNewFile();
-    void Load_LoadsIntegrityValue();
+    void Load_LoadsThrustValue();
 };
 
 Thruster_Tests::Thruster_Tests() {}
@@ -48,7 +48,7 @@ void Thruster_Tests::Save_CreatesNewFile() {
     }
 }
 
-void Thruster_Tests::Load_LoadsIntegrityValue() {
+void Thruster_Tests::Load_LoadsThrustValue() {
     // Arrange
     Thruster thruster = Thruster();
     float expectedValue = -1.f;
