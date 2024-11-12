@@ -19,6 +19,7 @@ public:
     QVector2D Acceleration;
 
     Navigation();
+    ~Navigation();
 
     /// Applies the thrust values to velocity of the spaceship.
     void ApplyThrust(float mass, float deltaTime);
