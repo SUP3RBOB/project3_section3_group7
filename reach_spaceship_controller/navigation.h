@@ -5,9 +5,6 @@
 
 /// Represents the navigation module of the spcaeship.
 class Navigation : public ISavable {
-private:
-    float ThrustPower;
-
 public:
     /// The position of the spaceship.
     QVector2D Position;
