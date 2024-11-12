@@ -2,56 +2,63 @@
 #include <QDebug>
 
 Spaceship::Spaceship() {
-    lights = Lights();
-    lifeSupport = LifeSupport(100.f, 22.f);
-    hull = Hull();
+    power = new Power(100.f);
+    lights = new Lights();
+    lifeSupport = new LifeSupport(100.f, 22.f);
+    hull = new Hull();
 
-    connect(&power, &Power::OnPowerActivated, this, &Spaceship::PowerActivated);
+    connect(power, &Power::OnPowerActivated, this, &Spaceship::PowerActivated);
 }
 
-Spaceship::~Spaceship() { }
+Spaceship::~Spaceship() {
+    delete power;
+    delete lights;
+    delete lifeSupport;
+    delete communication;
+    delete hull;
+}
 
 Power& Spaceship::GetPower() {
-    return power;
+    return (*power);
 }
 
 Lights& Spaceship::GetLights() {
-    return lights;
+    return (*lights);
 }
 
 LifeSupport& Spaceship::GetLifeSupport() {
-    return lifeSupport;
+    return (*lifeSupport);
 }
 
 Communication& Spaceship::GetComms() {
-    return communication;
+    return (*communication);
 }
 
 Hull& Spaceship::GetHull() {
-    return hull;
+    return (*hull);
 }
 
 void Spaceship::Save() {
-    power.Save("power.txt");
-    lights.Save("lights.txt");
-    communication.Save("comms.txt");
-    lifeSupport.Save("lifesupport.txt");
-    hull.Save("hull.txt");
+    power->Save("power.txt");
+    lights->Save("lights.txt");
+    communication->Save("comms.txt");
+    lifeSupport->Save("lifesupport.txt");
+    hull->Save("hull.txt");
 }
 
 void Spaceship::Load() {
-    power.Load("power.txt");
-    lights.Load("lights.txt");
-    communication.Load("comms.txt");
-    lifeSupport.Load("lifesupport.txt");
-    hull.Load("hull.txt");
+    power->Load("power.txt");
+    lights->Load("lights.txt");
+    communication->Load("comms.txt");
+    lifeSupport->Load("lifesupport.txt");
+    hull->Load("hull.txt");
 }
 
 void Spaceship::PowerActivated(bool isOn) {
     if (isOn) {
-        lights.Load("lights.txt");
+        lights->Load("lights.txt");
     } else {
-        lights.Save("lights.txt");
-        lights.turnOff();
+        lights->Save("lights.txt");
+        lights->turnOff();
     }
 }

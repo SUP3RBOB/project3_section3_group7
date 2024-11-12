@@ -11,11 +11,11 @@ class Spaceship : public QObject {
 private:
     Q_OBJECT
 
-    Power power = Power(100.f);
-    Lights lights;
-    LifeSupport lifeSupport;
-    Communication communication = Communication();
-    Hull hull;
+    Power* power;
+    Lights* lights;
+    LifeSupport* lifeSupport;
+    Communication* communication;
+    Hull* hull;
 
 private slots:
     void PowerActivated(bool isOn);
