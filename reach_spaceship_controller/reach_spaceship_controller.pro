@@ -17,7 +17,7 @@ SOURCES += \
     mainwindow.cpp \
     navigation.cpp \
     power.cpp \
-    vector2.cpp
+    thruster.cpp \
 
 HEADERS += \
     comms.h \
@@ -28,7 +28,7 @@ HEADERS += \
     mainwindow.h \
     navigation.h \
     power.h \
-    vector2.h
+    thruster.h \
 
 FORMS += \
     mainwindow.ui
