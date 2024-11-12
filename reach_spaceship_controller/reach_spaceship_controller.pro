@@ -15,6 +15,7 @@ SOURCES += \
     lights.cpp \
     main.cpp \
     mainwindow.cpp \
+    navigation.cpp \
     power.cpp \
     vector2.cpp
 
@@ -25,6 +26,7 @@ HEADERS += \
     isavable.h \
     lifesupport.h \
     mainwindow.h \
+    navigation.h \
     power.h \
     vector2.h
 
