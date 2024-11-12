@@ -26,14 +26,10 @@ void Navigation::Save(QString fileName) {
     QFile file = QFile(fileName);
     if (file.open(QIODevice::WriteOnly)) {
         QTextStream stream = QTextStream(&file);
-        stream << Position.x() << endl;
-        stream << Position.y() << endl;
-        stream << Direction.x() << endl;
-        stream << Direction.y() << endl;
-        stream << Velocity.x() << endl;
-        stream << Velocity.y() << endl;
-        stream << Acceleration.x() << endl;
-        stream << Acceleration.y() << endl;
+        stream << Position.x() << "," << Position.y() << endl;
+        stream << Direction.x() << "," << Direction.y() << endl;
+        stream << Velocity.x() << "," << Velocity.y() << endl;
+        stream << Acceleration.x() << "," << Acceleration.y() << endl;
 
         file.close();
     }
@@ -44,14 +40,21 @@ void Navigation::Load(QString fileName) {
     if (file.open(QIODevice::ReadOnly)) {
         QTextStream stream = QTextStream(&file);
 
-        Position.setX(stream.readLine().toFloat());
-        Position.setY(stream.readLine().toFloat());
-        Direction.setX(stream.readLine().toFloat());
-        Direction.setY(stream.readLine().toFloat());
-        Velocity.setX(stream.readLine().toFloat());
-        Velocity.setY(stream.readLine().toFloat());
-        Acceleration.setX(stream.readLine().toFloat());
-        Acceleration.setY(stream.readLine().toFloat());
+        QStringList values = stream.readLine().split(",");
+        Position.setX(values[0].toFloat());
+        Position.setY(values[1].toFloat());
+
+        values = stream.readLine().split(",");
+        Direction.setX(values[0].toFloat());
+        Direction.setY(values[1].toFloat());
+
+        values = stream.readLine().split(",");
+        Velocity.setX(values[0].toFloat());
+        Velocity.setY(values[1].toFloat());
+
+        values = stream.readLine().split(",");
+        Acceleration.setX(values[0].toFloat());
+        Acceleration.setY(values[1].toFloat());
 
         file.close();
     }
