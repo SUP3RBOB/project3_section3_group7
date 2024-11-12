@@ -8,6 +8,9 @@ const float EARTH_RADIUS = 6.371e6f;
 const float THRUST_POWER = 5000.f;
 
 Navigation::Navigation() {
+    thrusterX = new Thruster();
+    thrusterY = new Thruster();
+
     Position = QVector2D(0.f, EARTH_RADIUS + 1000000.f);
     Direction = QVector2D();
     Velocity = QVector2D();
@@ -15,15 +18,24 @@ Navigation::Navigation() {
 }
 
 Navigation::~Navigation() {
+    delete thrusterX;
+    delete thrusterY;
+}
 
+Thruster& Navigation::ThrusterX() {
+    return (*thrusterX);
+}
+
+Thruster& Navigation::ThrusterY() {
+    return (*thrusterY);
 }
 
 void Navigation::ApplyThrust(float mass, float deltaTime) {
-    Direction.setX(0.f);
-    Direction.setY(0.f);
+    Direction.setX(thrusterX->GetThrust());
+    Direction.setY(thrusterY->GetThrust());
 
-    QVector2D accel = Direction * (THRUST_POWER / mass);
-    Velocity += accel * deltaTime;
+    QVector2D acceleration = Direction * (THRUST_POWER / mass);
+    Velocity += acceleration * deltaTime;
 }
 
 void Navigation::Save(QString fileName) {
@@ -37,6 +49,9 @@ void Navigation::Save(QString fileName) {
 
         file.close();
     }
+
+    thrusterX->Save("thrusterx.txt");
+    thrusterY->Save("thrustery.txt");
 }
 
 void Navigation::Load(QString fileName) {
@@ -62,4 +77,7 @@ void Navigation::Load(QString fileName) {
 
         file.close();
     }
+
+    thrusterX->Load("thrusterx.txt");
+    thrusterY->Load("thrustery.txt");
 }

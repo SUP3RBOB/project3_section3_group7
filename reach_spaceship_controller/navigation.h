@@ -1,10 +1,15 @@
 #ifndef NAVIGATION_H
 #define NAVIGATION_H
 #include "isavable.h"
+#include "thruster.h"
 #include <QVector2D>
 
 /// Represents the navigation module of the spcaeship.
 class Navigation : public ISavable {
+private:
+    Thruster* thrusterX;
+    Thruster* thrusterY;
+
 public:
     /// The position of the spaceship.
     QVector2D Position;
@@ -20,6 +25,12 @@ public:
 
     Navigation();
     ~Navigation();
+
+    /// Returns a reference to the X thruster of the navigation module.
+    Thruster& ThrusterX();
+
+    /// Returns a reference to the Y thruster of the navigation module.
+    Thruster& ThrusterY();
 
     /// Applies the thrust values to velocity of the spaceship.
     void ApplyThrust(float mass, float deltaTime);
