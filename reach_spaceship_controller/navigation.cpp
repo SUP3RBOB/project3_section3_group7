@@ -8,10 +8,10 @@ const float EARTH_RADIUS = 6.371e6f;
 const float THRUST_POWER = 5000.f;
 
 Navigation::Navigation() {
-    QVector2D Position = QVector2D(0.f, EARTH_RADIUS + 1000000.f);
-    QVector2D Direction = QVector2D();
-    QVector2D Velocity = QVector2D();
-    QVector2D Acceleration = QVector2D();
+    Position = QVector2D(0.f, EARTH_RADIUS + 1000000.f);
+    Direction = QVector2D();
+    Velocity = QVector2D();
+    Acceleration = QVector2D();
 }
 
 void Navigation::ApplyThrust(float mass, float deltaTime) {
