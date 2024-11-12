@@ -11,6 +11,7 @@ public:
     ~Navigation_tests();
 
 private slots:
+    void ApplyThrust_ModifiesThrustDirectionAndVelocity();
     void Save_CreatesNewFile();
     void Load_LoadsNavigationValues();
 };
@@ -18,6 +19,18 @@ private slots:
 Navigation_tests::Navigation_tests() {}
 
 Navigation_tests::~Navigation_tests() {}
+
+void Navigation_tests::ApplyThrust_ModifiesThrustDirectionAndVelocity() {
+    // Arrange
+    Navigation nav = Navigation();
+
+
+    // Act
+    nav.ApplyThrust(1000.f, 0.016f);
+
+    // Assert
+
+}
 
 void Navigation_tests::Save_CreatesNewFile() {
     // Arrange
