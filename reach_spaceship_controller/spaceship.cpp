@@ -2,6 +2,8 @@
 #include <QDebug>
 
 Spaceship::Spaceship() {
+    mass = 1000.f;
+
     power = new Power(100.f);
     lights = new Lights();
     lifeSupport = new LifeSupport(100.f, 22.f);

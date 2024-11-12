@@ -11,6 +11,8 @@ class Spaceship : public QObject {
 private:
     Q_OBJECT
 
+    float mass;
+
     Power* power;
     Lights* lights;
     LifeSupport* lifeSupport;
