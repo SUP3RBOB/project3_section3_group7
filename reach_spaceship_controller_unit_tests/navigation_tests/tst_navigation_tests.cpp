@@ -43,10 +43,7 @@ void Navigation_tests::Load_LoadsNavigationValues() {
     nav.Velocity = QVector2D(3.f, 3.f);
     nav.Acceleration = QVector2D(4.f, 4.f);
     nav.Save("navigation.txt");
-    nav.Position = QVector2D();
-    nav.Direction = QVector2D();
-    nav.Velocity = QVector2D();
-    nav.Acceleration = QVector2D();
+    nav = Navigation();
     QVector2D expectedPosition = QVector2D(1.f, 1.f);
     QVector2D expectedDirection = QVector2D(2.f, 2.f);
     QVector2D expectedVelocity = QVector2D(3.f, 3.f);
