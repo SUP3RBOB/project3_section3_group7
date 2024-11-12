@@ -8,8 +8,6 @@ Spaceship::Spaceship() {
     lights = new Lights();
     lifeSupport = new LifeSupport(100.f, 22.f);
     hull = new Hull();
-
-    connect(power, &Power::OnPowerActivated, this, &Spaceship::PowerActivated);
 }
 
 Spaceship::~Spaceship() {
@@ -18,6 +16,10 @@ Spaceship::~Spaceship() {
     delete lifeSupport;
     delete communication;
     delete hull;
+}
+
+float Spaceship::GetMass() const {
+    return mass;
 }
 
 Power& Spaceship::GetPower() {
@@ -54,13 +56,4 @@ void Spaceship::Load() {
     communication->Load("comms.txt");
     lifeSupport->Load("lifesupport.txt");
     hull->Load("hull.txt");
-}
-
-void Spaceship::PowerActivated(bool isOn) {
-    if (isOn) {
-        lights->Load("lights.txt");
-    } else {
-        lights->Save("lights.txt");
-        lights->turnOff();
-    }
 }

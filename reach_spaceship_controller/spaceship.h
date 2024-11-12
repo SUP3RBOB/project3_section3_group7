@@ -7,10 +7,8 @@
 #include "lifesupport.h"
 #include "hull.h"
 
-class Spaceship : public QObject {
+class Spaceship {
 private:
-    Q_OBJECT
-
     float mass;
 
     Power* power;
@@ -19,12 +17,11 @@ private:
     Communication* communication;
     Hull* hull;
 
-private slots:
-    void PowerActivated(bool isOn);
-
 public:
     Spaceship();
     ~Spaceship();
+
+    float GetMass() const;
 
     Power& GetPower();
     Lights& GetLights();
