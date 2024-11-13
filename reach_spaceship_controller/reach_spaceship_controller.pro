@@ -15,9 +15,10 @@ SOURCES += \
     lights.cpp \
     main.cpp \
     mainwindow.cpp \
+    navigation.cpp \
     power.cpp \
     spaceship.cpp \
-    vector2.cpp
+    thruster.cpp
 
 HEADERS += \
     comms.h \
@@ -26,9 +27,10 @@ HEADERS += \
     isavable.h \
     lifesupport.h \
     mainwindow.h \
+    navigation.h \
     power.h \
     spaceship.h \
-    vector2.h
+    thruster.h
 
 FORMS += \
     mainwindow.ui
