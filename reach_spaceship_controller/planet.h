@@ -1,7 +1,6 @@
 #ifndef PLANET_H
 #define PLANET_H
 
-#include <QString>
 #include <QVector2D>  // Using QVector2D for position
 
 class Planet {
