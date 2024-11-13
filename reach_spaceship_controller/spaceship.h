@@ -1,6 +1,7 @@
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
+#include "navigation.h"
 #include "power.h"
 #include "Lights.h"
 #include "comms.h"
@@ -11,6 +12,7 @@ class Spaceship {
 private:
     float mass;
 
+    Navigation* navigation;
     Power* power;
     Lights* lights;
     LifeSupport* lifeSupport;
@@ -23,6 +25,7 @@ public:
 
     float GetMass() const;
 
+    Navigation& GetNavigation();
     Power& GetPower();
     Lights& GetLights();
     LifeSupport& GetLifeSupport();
