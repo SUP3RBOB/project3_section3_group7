@@ -10,23 +10,27 @@ CONFIG += c++17
 
 SOURCES += \
     comms.cpp \
+    earth.cpp \
     hull.cpp \
     lifesupport.cpp \
     lights.cpp \
     main.cpp \
     mainwindow.cpp \
     navigation.cpp \
+    planet.cpp \
     power.cpp \
     thruster.cpp \
 
 HEADERS += \
     comms.h \
     Lights.h \
+    earth.h \
     hull.h \
     isavable.h \
     lifesupport.h \
     mainwindow.h \
     navigation.h \
+    planet.h \
     power.h \
     thruster.h \
 
