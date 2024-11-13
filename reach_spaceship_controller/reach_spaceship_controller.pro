@@ -16,6 +16,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     navigation.cpp \
+    planet.cpp \
     power.cpp \
     thruster.cpp \
 
@@ -27,6 +28,7 @@ HEADERS += \
     lifesupport.h \
     mainwindow.h \
     navigation.h \
+    planet.h \
     power.h \
     thruster.h \
 
