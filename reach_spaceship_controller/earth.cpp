@@ -5,11 +5,11 @@ Earth::Earth(const QString &name, float x, float y, float mass, float radius)
     : Planet(name, x, y), mass(mass), radius(radius) {}
 
 // Returns Earth's mass
-float Earth::GetMass() const noexcept {
+float Earth::GetMass() const {
     return mass;
 }
 
 // Returns Earth's radius
-float Earth::GetRadius() const noexcept {
+float Earth::GetRadius() const {
     return radius;
 }
