@@ -2,44 +2,25 @@
 #define PLANET_H
 
 #include <QString>
-#include <string>
+#include <QVector2D>  // Using QVector2D for position
 
 class Planet {
 protected:
-    QString name;
-
-    // Internal struct for 2D position, representing the position
-    struct Position {
-        float x = 0.0f;
-        float y = 0.0f;
-
-        // Constructor with default parameters
-        constexpr Position(float x = 0.0f, float y = 0.0f) noexcept : x(x), y(y) {}
-
-        // Convert position to a string
-        std::string ToString() const {
-            return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
-        }
-    };
-
-    Position position;
+    QString name;  // Name of the planet
+    QVector2D position;  // Position using QVector2D (x, y)
 
 public:
     // Constructor that initializes the planet's name and position
-    explicit Planet(const QString &name, float x = 0.0f, float y = 0.0f) noexcept;
-
-    // Virtual methods for mass and radius to be overridden by derived classes
-    virtual float GetMass() const noexcept = 0;
-    virtual float GetRadius() const noexcept = 0;
+    Planet(const QString &name, float x = 0.0f, float y = 0.0f);
 
     // Getter for the planet's name
-    QString GetName() const noexcept;
+    QString GetName() const;
 
-    // Getter for the planet's position as a Position struct
-    Position GetPosition() const noexcept;
+    // Getter for the planet's position as a QVector2D
+    QVector2D GetPosition() const;
 
-    // Virtual destructor
-    virtual ~Planet() noexcept = default;
+    // Virtual destructor for proper cleanup in derived classes
+    virtual ~Planet() = default;
 };
 
 #endif // PLANET_H
