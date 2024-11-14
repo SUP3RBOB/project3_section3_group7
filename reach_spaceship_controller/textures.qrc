@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/new/prefix1">
+    <qresource prefix="/Textures">
         <file>Images/green light.png</file>
         <file>Images/red light.png</file>
         <file>Images/Steel texture.png</file>
