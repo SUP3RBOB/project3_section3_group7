@@ -6,7 +6,6 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES += tst_vector2_tests.cpp
-
+SOURCES +=  tst_lifesupport_tests.cpp
 INCLUDEPATH += "../../reach_spaceship_controller"
-SOURCES += ../../reach_spaceship_controller/vector2.cpp
+SOURCES += "../../reach_spaceship_controller/lifesupport.cpp"
