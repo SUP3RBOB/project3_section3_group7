@@ -25,8 +25,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // Paint view setup
     currentScale = 5e-5f;
-    currentScale /= 1.5;
+    currentScale /= 4.25f;
     pan = QVector2D();
+
+    const float PAN_YOFFSET = 13000000.f;
+    pan.setY(pan.y() + PAN_YOFFSET);
 
     spaceshipTrail = QList<QVector2D>();
     spaceshipTrail.append(simulation->GetSpaceship().GetNavigation().Position);

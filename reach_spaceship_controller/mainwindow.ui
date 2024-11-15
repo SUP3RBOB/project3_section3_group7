@@ -30,32 +30,8 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(68, 68, 68);</string>
+    <string notr="true"/>
    </property>
-   <widget class="QFrame" name="Visual">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>10</y>
-      <width>640</width>
-      <height>391</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Shadow::Raised</enum>
-    </property>
-   </widget>
    <widget class="QListWidget" name="MessagesList">
     <property name="geometry">
      <rect>
@@ -942,27 +918,20 @@ color: rgb(0, 0, 0);</string>
     <zorder>frame_4</zorder>
     <zorder>frame_5</zorder>
    </widget>
-   <widget class="QFrame" name="frame_2">
+   <widget class="QWidget" name="background" native="true">
     <property name="geometry">
      <rect>
-      <x>-420</x>
-      <y>-30</y>
-      <width>1721</width>
-      <height>791</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1280</width>
+      <height>720</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/Images/Images/wood texture.png);</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Shadow::Raised</enum>
+     <string notr="true">background-image: url(:/Images/Images/wood with hole.png);</string>
     </property>
    </widget>
-   <zorder>frame_2</zorder>
-   <zorder>Visual</zorder>
+   <zorder>background</zorder>
    <zorder>MessagesList</zorder>
    <zorder>Shipmsgtoggle</zorder>
    <zorder>power</zorder>
