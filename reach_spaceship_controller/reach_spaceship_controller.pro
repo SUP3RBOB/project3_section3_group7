@@ -20,7 +20,8 @@ SOURCES += \
     navigation.cpp \
     planet.cpp \
     power.cpp \
-    thruster.cpp \
+    spaceship.cpp \
+    thruster.cpp
 
 HEADERS += \
     Map.h \
@@ -34,7 +35,8 @@ HEADERS += \
     navigation.h \
     planet.h \
     power.h \
-    thruster.h \
+    spaceship.h \
+    thruster.h
 
 FORMS += \
     mainwindow.ui

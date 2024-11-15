@@ -50,8 +50,8 @@ void Navigation::Save(QString fileName) {
         file.close();
     }
 
-    thrusterX->Save("thrusterx.txt");
-    thrusterY->Save("thrustery.txt");
+    thrusterX->Save("thruster_x.txt");
+    thrusterY->Save("thruster_y.txt");
 }
 
 void Navigation::Load(QString fileName) {
@@ -78,6 +78,6 @@ void Navigation::Load(QString fileName) {
         file.close();
     }
 
-    thrusterX->Load("thrusterx.txt");
-    thrusterY->Load("thrustery.txt");
+    thrusterX->Load("thruster_x.txt");
+    thrusterY->Load("thruster_y.txt");
 }

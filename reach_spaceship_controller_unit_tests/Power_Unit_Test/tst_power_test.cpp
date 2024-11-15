@@ -8,17 +8,24 @@ class Power_test : public QObject
 public:
     Power_test();
     ~Power_test();
+    bool powerStatus;
+    void SetPowerStatus(bool on);
 
 private slots:
     void test_initialValues();
     void test_setPowerLevel();
     void test_setPowerStatus();
     void test_saveAndLoad();
+    void OnPowerActivated_SignalsPowerActivatedBoolean();
 };
 
 Power_test::Power_test() {}
 
 Power_test::~Power_test() {}
+
+void Power_test::SetPowerStatus(bool on) {
+    powerStatus = on;
+}
 
 // Test the initial values of the Power object
 void Power_test::test_initialValues() {
@@ -57,6 +64,19 @@ void Power_test::test_saveAndLoad() {
 
     QCOMPARE(loadedPower.GetPower(), 50.0f); // Verify power level is loaded correctly
     QCOMPARE(loadedPower.IsOn(), true);      // Verify power status is loaded correctly
+}
+
+void Power_test::OnPowerActivated_SignalsPowerActivatedBoolean() {
+    // Arrange
+    Power power;
+    powerStatus = false;
+    connect(&power, &Power::OnPowerActivated, this, &Power_test::SetPowerStatus);
+
+    // Act
+    power.SetOn(true);
+
+    // Assert
+    QVERIFY(powerStatus);
 }
 
 QTEST_APPLESS_MAIN(Power_test)

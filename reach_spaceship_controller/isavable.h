@@ -6,6 +6,7 @@
 /// Interface with methods for saving and loading.
 class ISavable {
 public:
+    virtual ~ISavable() = default;
     virtual void Save(QString fileName) = 0;
     virtual void Load(QString fileName) = 0;
 };

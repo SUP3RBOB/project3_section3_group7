@@ -9,6 +9,7 @@ private:
     float temperature;
 
 public:
+    LifeSupport();
     LifeSupport(float oxygen, float temperature);
 
     /// Returns the oxygen levels of the spaceship.
