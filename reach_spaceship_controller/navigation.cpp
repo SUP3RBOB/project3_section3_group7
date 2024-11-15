@@ -4,11 +4,11 @@
 
 using namespace Qt;
 
-const float EARTH_RADIUS = 6.371e6f;
-const float INITIAL_YOFFSET = 1000000.f;
-const float INITIAL_XVEL = 7670.f;
-
 Navigation::Navigation() {
+    const float EARTH_RADIUS = 6.371e6f;
+    const float INITIAL_YOFFSET = 1000000.f;
+    const float INITIAL_XVEL = 7670.f;
+
     thrusterX = new Thruster();
     thrusterY = new Thruster();
 

@@ -2,26 +2,30 @@
 #include "ui_mainwindow.h"
 #include <QPainter>
 
+using namespace Qt;
+
 const float TICK_RATE = 0.016f;
 const float TIMER_RATE = 16.f;
 const float SIMULATION_SPEED = 500.f;
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
+    // Window setup
+    setWindowTitle("Reach Spaceship Controller");
+    setFixedSize(1280, 720);
+
+    // Creating objects
     simulation = new Simulation();
 
     updateTimer = new QTimer();
     connect(updateTimer, &QTimer::timeout, this, &MainWindow::Update);
     updateTimer->start(TIMER_RATE);
 
+    // Paint view setup
     currentScale = 5e-5f;
     currentScale /= 1.5;
     pan = QVector2D();
-
-    //simulation->GetSpaceship().GetNavigation().ThrusterX().SetThrust(1.f);
-    float shipMass = simulation->GetSpaceship().GetMass();
-    simulation->GetSpaceship().GetNavigation().ApplyThrust(shipMass, TICK_RATE);
 }
 
 MainWindow::~MainWindow() {
@@ -30,6 +34,7 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
+// Apply object coordinates with the pan and scale
 QPoint MainWindow::ToScreenCoordinates(const QVector2D& position) {
     QVector2D earthPosition = simulation->GetEarth().GetPosition();
     float offsetX = -earthPosition.x() + pan.x();
@@ -40,11 +45,12 @@ QPoint MainWindow::ToScreenCoordinates(const QVector2D& position) {
     return QPoint(x, y);
 }
 
+// Draw orbit view
 void MainWindow::paintEvent(QPaintEvent* event) {
     QPainter painter = QPainter(this);
 
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.fillRect(rect(), Qt::black);
+    painter.fillRect(rect(), black);
 
     Navigation& nav = simulation->GetSpaceship().GetNavigation();
     Earth& earth = simulation->GetEarth();
@@ -52,17 +58,18 @@ void MainWindow::paintEvent(QPaintEvent* event) {
     // Draw earth
     QPoint earthPoint = ToScreenCoordinates(earth.GetPosition());
     int earthRadius = static_cast<int>(earth.GetRadius() * currentScale);
-    painter.setBrush(Qt::blue);
-    painter.setPen(Qt::NoPen);
+    painter.setBrush(blue);
+    painter.setPen(NoPen);
     painter.drawEllipse(earthPoint, earthRadius, earthRadius);
 
     // Draw spaceship
     QPoint shipPoint = ToScreenCoordinates(nav.Position);
-    painter.setBrush(Qt::yellow);
-    painter.setPen(Qt::NoPen);
+    painter.setBrush(yellow);
+    painter.setPen(NoPen);
     painter.drawEllipse(shipPoint, 5, 5);
 }
 
+// Update every 'frame'
 void MainWindow::Update() {
     simulation->Update(TICK_RATE, SIMULATION_SPEED);
     repaint();

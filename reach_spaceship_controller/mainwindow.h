@@ -7,22 +7,14 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class MainWindow;
+    class MainWindow;
 }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
+private:
     Q_OBJECT
 
-public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
-protected:
-    void paintEvent(QPaintEvent *event) override;
-
-private:
     Ui::MainWindow *ui;
 
     Simulation* simulation;
@@ -34,5 +26,13 @@ private:
     QVector2D pan;
 
     QPoint ToScreenCoordinates(const QVector2D& position);
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
+public:
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
+
 };
 #endif // MAINWINDOW_H
