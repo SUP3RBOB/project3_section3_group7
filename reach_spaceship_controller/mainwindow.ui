@@ -268,7 +268,8 @@ border-radius: 10px</string>
      <property name="styleSheet">
       <string notr="true">color: rgb(0, 0, 0);
 border-radius: 10px;
-background-image: url(:/new/prefix1/Images/Steel texture.png);</string>
+background-image: url(:/Images/Images/Steel texture.png);
+</string>
      </property>
      <property name="text">
       <string>Ship Messages Toggle</string>
@@ -334,7 +335,7 @@ border-radius: 10px</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(0, 0, 0);
-background-image: url(:/new/prefix1/Images/Steel texture.png);
+background-image: url(:/Images/Images/Steel texture.png);
 border-radius: 10px</string>
      </property>
      <property name="text">
@@ -357,7 +358,7 @@ border-radius: 10px</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="ToggleLights.qrc">:/new/prefix1/Images/green light.png</pixmap>
+      <pixmap resource="resource.qrc">:/Images/Images/green light.png</pixmap>
      </property>
     </widget>
    </widget>
@@ -471,11 +472,13 @@ border-radius: 15px;
       <property name="font">
        <font>
         <pointsize>15</pointsize>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(0, 0, 0);</string>
+       <string notr="true">color: rgb(0,0,0);
+background-image: url(:/Images/Images/Steel texture.png);
+</string>
       </property>
       <property name="text">
        <string>  Hull</string>
@@ -552,7 +555,7 @@ border-radius: 10px</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="ToggleLights.qrc">:/new/prefix1/Images/green light.png</pixmap>
+       <pixmap resource="resource.qrc">:/Images/Images/green light.png</pixmap>
       </property>
      </widget>
      <widget class="QLabel" name="label_5">
@@ -571,7 +574,7 @@ border-radius: 10px</string>
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-image: url(:/new/prefix1/Images/Steel texture.png);
+       <string notr="true">background-image: url(:/Images/Images/Steel texture.png);
 color: rgb(0, 0, 0);
 border-radius: 5px;</string>
       </property>
@@ -735,6 +738,58 @@ border-radius: 10px;</string>
        <number>2</number>
       </property>
      </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>35</x>
+        <y>55</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+background-image: url(:/Images/Images/Steel texture.png);
+color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Thurster 1</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>176</x>
+        <y>55</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+background-image: url(:/Images/Images/Steel texture.png);
+color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Thurster 2</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
     </widget>
     <widget class="QFrame" name="frame_5">
      <property name="geometry">
@@ -845,7 +900,7 @@ border-radius: 10px;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border-radius: 10px;
-background-image: url(:/new/prefix1/Images/Steel texture.png);
+background-image: url(:/Images/Images/Steel texture.png);
 color: rgb(0, 0, 0);</string>
       </property>
       <property name="text">
@@ -871,7 +926,7 @@ color: rgb(0, 0, 0);</string>
       </property>
       <property name="styleSheet">
        <string notr="true">border-radius: 10px;
-background-image: url(:/new/prefix1/Images/Steel texture.png);
+background-image: url(:/Images/Images/Steel texture.png);
 color: rgb(0, 0, 0);</string>
       </property>
       <property name="text">
@@ -897,7 +952,7 @@ color: rgb(0, 0, 0);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/new/prefix1/Images/wood texture.png);</string>
+     <string notr="true">background-image: url(:/Images/Images/wood texture.png);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
@@ -920,14 +975,14 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>33</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="ToggleLights.qrc"/>
+  <include location="resource.qrc"/>
  </resources>
  <connections/>
 </ui>
