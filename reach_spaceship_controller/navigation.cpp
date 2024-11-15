@@ -5,7 +5,6 @@
 using namespace Qt;
 
 const float EARTH_RADIUS = 6.371e6f;
-const float THRUST_POWER = 5000.f;
 
 Navigation::Navigation() {
     thrusterX = new Thruster();

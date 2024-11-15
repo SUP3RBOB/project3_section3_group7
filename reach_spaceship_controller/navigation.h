@@ -4,6 +4,8 @@
 #include "thruster.h"
 #include <QVector2D>
 
+const float THRUST_POWER = 5000.f;
+
 /// Represents the navigation module of the spcaeship.
 class Navigation : public ISavable {
 private:
