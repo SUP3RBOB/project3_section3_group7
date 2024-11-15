@@ -5,14 +5,16 @@
 using namespace Qt;
 
 const float EARTH_RADIUS = 6.371e6f;
+const float INITIAL_YOFFSET = 1000000.f;
+const float INITIAL_XVEL = 7670.f;
 
 Navigation::Navigation() {
     thrusterX = new Thruster();
     thrusterY = new Thruster();
 
-    Position = QVector2D(0.f, EARTH_RADIUS + 1000000.f);
+    Position = QVector2D(0.f, EARTH_RADIUS + INITIAL_YOFFSET);
     Direction = QVector2D();
-    Velocity = QVector2D();
+    Velocity = QVector2D(INITIAL_XVEL, 0.f);
     Acceleration = QVector2D();
 }
 

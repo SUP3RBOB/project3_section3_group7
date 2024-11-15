@@ -3,19 +3,17 @@
 #include <QPainter>
 
 const float TICK_RATE = 0.016f;
+const float TIMER_RATE = 16.f;
 const float SIMULATION_SPEED = 500.f;
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
     simulation = new Simulation();
 
     updateTimer = new QTimer();
     connect(updateTimer, &QTimer::timeout, this, &MainWindow::Update);
-    updateTimer->start(TICK_RATE * 1000.f);
+    updateTimer->start(TIMER_RATE);
 
     currentScale = 5e-5f;
     currentScale /= 1.5;
@@ -26,16 +24,27 @@ MainWindow::MainWindow(QWidget *parent)
     simulation->GetSpaceship().GetNavigation().ApplyThrust(shipMass, TICK_RATE);
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete updateTimer;
     delete simulation;
     delete ui;
 }
 
+QPoint MainWindow::ToScreenCoordinates(const QVector2D& position) {
+    QVector2D earthPosition = simulation->GetEarth().GetPosition();
+    float offsetX = -earthPosition.x() + pan.x();
+    float offsetY = -earthPosition.y() + pan.y();
+
+    int x = static_cast<int>(width() / 2 + (position.x() + offsetX) * currentScale);
+    int y = static_cast<int>(height() / 2 - (position.y() + offsetY) * currentScale);
+    return QPoint(x, y);
+}
+
 void MainWindow::paintEvent(QPaintEvent* event) {
     QPainter painter = QPainter(this);
+
     painter.setRenderHint(QPainter::Antialiasing);
+    painter.fillRect(rect(), Qt::black);
 
     Navigation& nav = simulation->GetSpaceship().GetNavigation();
     Earth& earth = simulation->GetEarth();
@@ -59,12 +68,3 @@ void MainWindow::Update() {
     repaint();
 }
 
-QPoint MainWindow::ToScreenCoordinates(const QVector2D& position) {
-    QVector2D earthPosition = simulation->GetEarth().GetPosition();
-    float offsetX = -earthPosition.x() + pan.x();
-    float offsetY = -earthPosition.y() + pan.y();
-
-    int x = static_cast<int>(width() / 2 + (position.x() + offsetX) * currentScale);
-    int y = static_cast<int>(height() / 2 - (position.y() + offsetY) * currentScale);
-    return QPoint(x, y);
-}
