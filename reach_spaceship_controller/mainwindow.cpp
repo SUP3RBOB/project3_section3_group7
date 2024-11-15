@@ -56,7 +56,6 @@ void MainWindow::paintEvent(QPaintEvent* event) {
     painter.setRenderHint(QPainter::Antialiasing);
     painter.fillRect(rect(), black);
 
-
     Navigation& nav = simulation->GetSpaceship().GetNavigation();
     Earth& earth = simulation->GetEarth();
 
