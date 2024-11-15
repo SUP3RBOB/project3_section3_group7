@@ -20,6 +20,7 @@ SOURCES += \
     navigation.cpp \
     planet.cpp \
     power.cpp \
+    simulation.cpp \
     spaceship.cpp \
     thruster.cpp
 
@@ -35,6 +36,7 @@ HEADERS += \
     navigation.h \
     planet.h \
     power.h \
+    simulation.h \
     spaceship.h \
     thruster.h
 
