@@ -39,7 +39,9 @@ bool Spaceship_Tests::FilesExist() {
         QFile::exists("lights.txt") &&
         QFile::exists("comms.txt") &&
         QFile::exists("lifesupport.txt") &&
-        QFile::exists("hull.txt");
+        QFile::exists("hull.txt") &&
+        QFile::exists("thruster_x.txt") &&
+        QFile::exists("thruster_y.txt");
 }
 
 void Spaceship_Tests::DeleteFiles() {
@@ -63,8 +65,12 @@ void Spaceship_Tests::DeleteFiles() {
         QFile::remove("lifesupport.txt");
     }
 
-    if (QFile::exists("hull.txt")) {
-        QFile::remove("hull.txt");
+    if (QFile::exists("thruster_x.txt")) {
+        QFile::remove("thruster_x.txt");
+    }
+
+    if (QFile::exists("thruster_y.txt")) {
+        QFile::remove("thruster_y.txt");
     }
 }
 

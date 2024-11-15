@@ -8,7 +8,9 @@ Spaceship::Spaceship() {
     power = new Power(100.f);
     lights = new Lights();
     lifeSupport = new LifeSupport(100.f, 22.f);
+    communication = new Communication();
     hull = new Hull();
+    map = new Map();
 }
 
 Spaceship::~Spaceship() {
@@ -18,6 +20,7 @@ Spaceship::~Spaceship() {
     delete lifeSupport;
     delete communication;
     delete hull;
+    delete map;
 }
 
 float Spaceship::GetMass() const {
@@ -46,6 +49,10 @@ Communication& Spaceship::GetComms() {
 
 Hull& Spaceship::GetHull() {
     return (*hull);
+}
+
+Map &Spaceship::GetMap() {
+    return (*map);
 }
 
 void Spaceship::Save() {

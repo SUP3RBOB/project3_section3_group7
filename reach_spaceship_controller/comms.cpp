@@ -27,6 +27,8 @@ Communication::Communication() : QObject() {
         "Heat shielding status report: no irregularities detected.",
         "Astronomical research data shared from observatories worldwide"
     });
+
+    MessagesReceived = QList<QString>();
 }
 
 void Communication::ReceiveRandomMessage() {
