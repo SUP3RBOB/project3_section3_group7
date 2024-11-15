@@ -56,7 +56,7 @@
      <enum>QFrame::Shadow::Raised</enum>
     </property>
    </widget>
-   <widget class="QListWidget" name="Messages">
+   <widget class="QListWidget" name="MessagesList">
     <property name="geometry">
      <rect>
       <x>970</x>
@@ -91,7 +91,7 @@ border-radius: 15px;</string>
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="ShipMessagesToggleButton">
      <property name="geometry">
       <rect>
        <x>110</x>
@@ -301,7 +301,7 @@ border-radius: 15px;</string>
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="PowerButton">
      <property name="geometry">
       <rect>
        <x>110</x>
@@ -345,7 +345,7 @@ border-radius: 10px</string>
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="PowerIndicator">
      <property name="geometry">
       <rect>
        <x>100</x>
@@ -362,7 +362,7 @@ border-radius: 10px</string>
      </property>
     </widget>
    </widget>
-   <widget class="QTreeWidget" name="Harrizzballs">
+   <widget class="QTreeWidget" name="PlanetTable">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -481,7 +481,7 @@ background-image: url(:/Images/Images/Steel texture.png);
 </string>
       </property>
       <property name="text">
-       <string>  Hull</string>
+       <string>Hull</string>
       </property>
       <property name="textFormat">
        <enum>Qt::TextFormat::AutoText</enum>
@@ -519,7 +519,7 @@ border-radius: 15px;</string>
      <property name="frameShadow">
       <enum>QFrame::Shadow::Raised</enum>
      </property>
-     <widget class="QPushButton" name="Lights">
+     <widget class="QPushButton" name="LightsButton">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -536,7 +536,7 @@ border-radius: 10px</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="Lightslight">
+     <widget class="QLabel" name="LightsIndicator">
       <property name="geometry">
        <rect>
         <x>25</x>
@@ -613,7 +613,7 @@ border-radius: 5px;</string>
      <property name="frameShadow">
       <enum>QFrame::Shadow::Raised</enum>
      </property>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="ThrustDownButton">
       <property name="geometry">
        <rect>
         <x>105</x>
@@ -630,7 +630,7 @@ border-radius: 10px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_7">
+     <widget class="QPushButton" name="ThrustClearButton">
       <property name="geometry">
        <rect>
         <x>125</x>
@@ -647,7 +647,7 @@ border-radius: 10px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="ThrustLeftButton">
       <property name="geometry">
        <rect>
         <x>25</x>
@@ -664,7 +664,7 @@ border-radius: 10px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="ThrustRightButton">
       <property name="geometry">
        <rect>
         <x>185</x>
@@ -681,7 +681,7 @@ border-radius: 10px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="ThrustUpButton">
       <property name="geometry">
        <rect>
         <x>105</x>
@@ -698,7 +698,7 @@ border-radius: 10px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLCDNumber" name="lcdNumber">
+     <widget class="QLCDNumber" name="ThrusterXLabel">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -718,7 +718,7 @@ border-radius: 10px;</string>
        <number>2</number>
       </property>
      </widget>
-     <widget class="QLCDNumber" name="lcdNumber_2">
+     <widget class="QLCDNumber" name="ThrusterYLabel">
       <property name="geometry">
        <rect>
         <x>180</x>
@@ -758,7 +758,7 @@ background-image: url(:/Images/Images/Steel texture.png);
 color: rgb(0, 0, 0);</string>
       </property>
       <property name="text">
-       <string>Thurster 1</string>
+       <string>Thurster X</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -784,7 +784,7 @@ background-image: url(:/Images/Images/Steel texture.png);
 color: rgb(0, 0, 0);</string>
       </property>
       <property name="text">
-       <string>Thurster 2</string>
+       <string>Thurster Y</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -809,7 +809,7 @@ color: rgb(0, 0, 0);</string>
      <property name="frameShadow">
       <enum>QFrame::Shadow::Raised</enum>
      </property>
-     <widget class="QLCDNumber" name="lcdNumber_4">
+     <widget class="QLCDNumber" name="OxygenLabel">
       <property name="geometry">
        <rect>
         <x>160</x>
@@ -829,7 +829,7 @@ border-radius: 10px;</string>
        <number>2</number>
       </property>
      </widget>
-     <widget class="QLCDNumber" name="lcdNumber_3">
+     <widget class="QLCDNumber" name="TempLabel">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -849,7 +849,7 @@ border-radius: 10px;</string>
        <number>2</number>
       </property>
      </widget>
-     <widget class="QSlider" name="verticalSlider">
+     <widget class="QSlider" name="TempSlider">
       <property name="geometry">
        <rect>
         <x>45</x>
@@ -871,7 +871,7 @@ border-radius: 10px;</string>
        <enum>Qt::Orientation::Vertical</enum>
       </property>
      </widget>
-     <widget class="QSlider" name="verticalSlider_2">
+     <widget class="QSlider" name="OxygenSlider">
       <property name="geometry">
        <rect>
         <x>185</x>
@@ -963,10 +963,10 @@ color: rgb(0, 0, 0);</string>
    </widget>
    <zorder>frame_2</zorder>
    <zorder>Visual</zorder>
-   <zorder>Messages</zorder>
+   <zorder>MessagesList</zorder>
    <zorder>Shipmsgtoggle</zorder>
    <zorder>power</zorder>
-   <zorder>Harrizzballs</zorder>
+   <zorder>PlanetTable</zorder>
    <zorder>MainPanel</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -975,7 +975,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
