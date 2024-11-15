@@ -32,6 +32,7 @@ Thruster& Navigation::ThrusterY() {
 void Navigation::ApplyThrust(float mass, float deltaTime) {
     Direction.setX(thrusterX->GetThrust());
     Direction.setY(thrusterY->GetThrust());
+    Direction.normalize();
 
     QVector2D acceleration = Direction * (THRUST_POWER / mass);
     Velocity = Velocity + acceleration * deltaTime;
