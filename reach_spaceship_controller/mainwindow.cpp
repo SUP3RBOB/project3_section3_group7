@@ -7,6 +7,7 @@ using namespace Qt;
 const float TICK_RATE = 0.016f;
 const float TIMER_RATE = 16.f;
 const float SIMULATION_SPEED = 500.f;
+const int TRAIL_LENGTH = 1000;
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -26,6 +27,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     currentScale = 5e-5f;
     currentScale /= 1.5;
     pan = QVector2D();
+
+    spaceshipTrail = QList<QVector2D>();
+    spaceshipTrail.append(simulation->GetSpaceship().GetNavigation().Position);
 }
 
 MainWindow::~MainWindow() {
@@ -52,6 +56,7 @@ void MainWindow::paintEvent(QPaintEvent* event) {
     painter.setRenderHint(QPainter::Antialiasing);
     painter.fillRect(rect(), black);
 
+
     Navigation& nav = simulation->GetSpaceship().GetNavigation();
     Earth& earth = simulation->GetEarth();
 
@@ -62,16 +67,32 @@ void MainWindow::paintEvent(QPaintEvent* event) {
     painter.setPen(NoPen);
     painter.drawEllipse(earthPoint, earthRadius, earthRadius);
 
+    // Draw spaceship trail
+    painter.setBrush(NoBrush);
+    painter.setPen(gray);
+    for (int i = 1; i < spaceshipTrail.count(); i++) {
+        QPoint start = ToScreenCoordinates(spaceshipTrail[i - 1]);
+        QPoint end = ToScreenCoordinates(spaceshipTrail[i]);
+        painter.drawLine(start, end);
+    }
+
     // Draw spaceship
     QPoint shipPoint = ToScreenCoordinates(nav.Position);
     painter.setBrush(yellow);
-    painter.setPen(NoPen);
+    painter.setPen(Qt::NoPen);
     painter.drawEllipse(shipPoint, 5, 5);
 }
 
 // Update every 'frame'
 void MainWindow::Update() {
     simulation->Update(TICK_RATE, SIMULATION_SPEED);
+
+    Navigation& nav = simulation->GetSpaceship().GetNavigation();
+    spaceshipTrail.append(nav.Position);
+    if (spaceshipTrail.count() > TRAIL_LENGTH) {
+        spaceshipTrail.removeFirst();
+    }
+
     repaint();
 }
 

@@ -24,6 +24,7 @@ private:
 
     float currentScale;
     QVector2D pan;
+    QList<QVector2D> spaceshipTrail;
 
     QPoint ToScreenCoordinates(const QVector2D& position);
 
