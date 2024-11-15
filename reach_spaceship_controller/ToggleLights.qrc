@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>Images/green light.png</file>
+        <file>Images/red light.png</file>
+        <file>Images/Steel texture.png</file>
+        <file>Images/wood texture.png</file>
+    </qresource>
+</RCC>
