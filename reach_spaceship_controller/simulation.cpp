@@ -12,11 +12,11 @@ Simulation::~Simulation() {
     delete earth;
 }
 
-Spaceship &Simulation::GetSpaceship() {
+Spaceship& Simulation::GetSpaceship() {
     return (*spaceship);
 }
 
-Earth &Simulation::GetEarth() {
+Earth& Simulation::GetEarth() {
     return (*earth);
 }
 
@@ -39,6 +39,6 @@ void Simulation::Update(float deltaTime, float simulationSpeed) {
     nav.Acceleration = gravityAccel + thrustAccel;
 
     // Update velocity and position
-    nav.Velocity = nav.Velocity + nav.Acceleration * deltaTime;
-    nav.Position = nav.Position + nav.Velocity * deltaTime;
+    nav.Velocity += nav.Acceleration * deltaTime;
+    nav.Position += nav.Velocity * deltaTime;
 }

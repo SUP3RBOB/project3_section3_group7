@@ -37,7 +37,7 @@ void Navigation::ApplyThrust(float mass, float deltaTime) {
     Direction.normalize();
 
     QVector2D acceleration = Direction * (THRUST_POWER / mass);
-    Velocity = Velocity + acceleration * deltaTime;
+    Velocity += acceleration * deltaTime;
 }
 
 void Navigation::Save(QString fileName) {
