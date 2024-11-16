@@ -20,6 +20,7 @@ private:
     Simulation* simulation;
     QTimer* updateTimer;
 
+    void Startup();
     void Update();
 
     float currentScale;
@@ -30,6 +31,7 @@ private:
     QPixmap offSprite;
 
     QPoint ToScreenCoordinates(const QVector2D& position);
+    bool IsPowerOn();
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -42,5 +44,7 @@ private slots:
     void on_TempSlider_valueChanged(int value);
     void on_OxygenSlider_valueChanged(int value);
     void OnPower(bool on);
+    void on_LightsButton_clicked();
+    void on_PowerButton_clicked();
 };
 #endif // MAINWINDOW_H

@@ -702,7 +702,7 @@ border-radius: 10px;</string>
 border-radius: 10px;</string>
       </property>
       <property name="digitCount">
-       <number>1</number>
+       <number>2</number>
       </property>
      </widget>
      <widget class="QLCDNumber" name="ThrusterYLabel">
@@ -722,7 +722,7 @@ border-radius: 10px;</string>
 border-radius: 10px;</string>
       </property>
       <property name="digitCount">
-       <number>1</number>
+       <number>2</number>
       </property>
      </widget>
      <widget class="QLabel" name="label_9">
@@ -813,7 +813,7 @@ color: rgb(0, 0, 0);</string>
 border-radius: 10px;</string>
       </property>
       <property name="digitCount">
-       <number>2</number>
+       <number>3</number>
       </property>
      </widget>
      <widget class="QLCDNumber" name="TempLabel">
@@ -866,6 +866,9 @@ border-radius: 10px;</string>
         <width>20</width>
         <height>91</height>
        </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
       </property>
       <property name="orientation">
        <enum>Qt::Orientation::Vertical</enum>
@@ -942,12 +945,32 @@ color: rgb(0, 0, 0);</string>
      <string notr="true">background-image: url(:/Images/Images/wood with hole.png);</string>
     </property>
    </widget>
+   <widget class="QWidget" name="LightsOverlay" native="true">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1280</width>
+      <height>720</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0, 0, 0, 170);</string>
+    </property>
+   </widget>
    <zorder>background</zorder>
    <zorder>MessagesList</zorder>
    <zorder>Shipmsgtoggle</zorder>
    <zorder>power</zorder>
    <zorder>PlanetTable</zorder>
    <zorder>MainPanel</zorder>
+   <zorder>LightsOverlay</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

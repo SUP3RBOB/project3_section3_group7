@@ -38,12 +38,19 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Initialize indicator sprites
     onSprite = QPixmap(":/Images/Images/green light.png");
     offSprite = QPixmap(":/Images/Images/red light.png");
+
+    // Startup
+    Startup();
 }
 
 MainWindow::~MainWindow() {
     delete updateTimer;
     delete simulation;
     delete ui;
+}
+
+bool MainWindow::IsPowerOn() {
+    return simulation->GetSpaceship().GetPower().IsOn();
 }
 
 // Apply object coordinates with the pan and scale
@@ -63,6 +70,11 @@ void MainWindow::paintEvent(QPaintEvent* event) {
 
     painter.setRenderHint(QPainter::Antialiasing);
     painter.fillRect(rect(), black);
+
+    // Don't draw orbit if there's no power
+    if (!IsPowerOn()) {
+        return;
+    }
 
     Navigation& nav = simulation->GetSpaceship().GetNavigation();
     Earth& earth = simulation->GetEarth();
@@ -86,8 +98,31 @@ void MainWindow::paintEvent(QPaintEvent* event) {
     // Draw spaceship
     QPoint shipPoint = ToScreenCoordinates(nav.Position);
     painter.setBrush(yellow);
-    painter.setPen(Qt::NoPen);
+    painter.setPen(NoPen);
     painter.drawEllipse(shipPoint, 5, 5);
+}
+
+// Startup for modules and UI integration
+void MainWindow::Startup() {
+    simulation->GetSpaceship().Load();
+    simulation->GetSpaceship().Save();
+
+    Power& power = simulation->GetSpaceship().GetPower();
+    Hull& hull = simulation->GetSpaceship().GetHull();
+    LifeSupport& ls = simulation->GetSpaceship().GetLifeSupport();
+    Lights& lights = simulation->GetSpaceship().GetLights();
+
+    power.SetOn(power.IsOn());
+    ui->Hull->display(qRound(hull.GetIntegrity()));
+
+    ui->TempSlider->setValue(qRound(ls.GetTemp()));
+    ui->OxygenSlider->setValue(qRound(ls.GetOxygen()));
+
+    ui->LightsOverlay->setAttribute(WA_TransparentForMouseEvents);
+
+    bool lightsAreOn = power.IsOn() && lights.isOn();
+    ui->LightsOverlay->setVisible(!lightsAreOn);
+    ui->LightsIndicator->setPixmap(lightsAreOn ? onSprite : offSprite);
 }
 
 // Update every 'frame'
@@ -104,18 +139,31 @@ void MainWindow::Update() {
 }
 
 void MainWindow::OnPower(bool on) {
+    Power& power = simulation->GetSpaceship().GetPower();
+    Lights& lights = simulation->GetSpaceship().GetLights();
+
     if (on) {
-
+        ui->PowerIndicator->setPixmap(onSprite);
     } else {
-
+        ui->PowerIndicator->setPixmap(offSprite);
+        lights.turnOff();
+        ui->LightsIndicator->setPixmap(offSprite);
+        ui->LightsOverlay->setVisible(true);
     }
+
+    ui->TempSlider->setEnabled(on);
+    ui->OxygenSlider->setEnabled(on);
+    ui->LightsButton->setEnabled(on);
+    ui->ShipMessagesToggleButton->setEnabled(on);
 }
 
 void MainWindow::on_TempSlider_valueChanged(int value) {
     LifeSupport& ls = simulation->GetSpaceship().GetLifeSupport();
 
     ls.SetTemp(value);
-    ui->TempLabel->display(ls.GetTemp());
+    ui->TempLabel->display(qRound(ls.GetTemp()));
+
+    ls.Save("lifesupport.txt");
 }
 
 
@@ -123,6 +171,35 @@ void MainWindow::on_OxygenSlider_valueChanged(int value) {
     LifeSupport& ls = simulation->GetSpaceship().GetLifeSupport();
 
     ls.SetOxygen(value);
-    ui->OxygenLabel->display(ls.GetOxygen());
+    ui->OxygenLabel->display(qRound(ls.GetOxygen()));
+
+    ls.Save("lifesupport.txt");
+}
+
+
+void MainWindow::on_LightsButton_clicked() {
+    Lights& lights = simulation->GetSpaceship().GetLights();
+
+    if (lights.isOn()) {
+        lights.turnOff();
+        ui->LightsIndicator->setPixmap(offSprite);
+        ui->LightsOverlay->setVisible(true);
+    } else {
+        lights.turnOn();
+        ui->LightsIndicator->setPixmap(onSprite);
+        ui->LightsOverlay->setVisible(false);
+    }
+
+    lights.Save("lights.txt");
+}
+
+
+void MainWindow::on_PowerButton_clicked() {
+    Power& power = simulation->GetSpaceship().GetPower();
+
+    power.SetOn(!power.IsOn());
+    ui->PowerIndicator->setPixmap(power.IsOn() ? onSprite : offSprite);
+
+    power.Save("power.txt");
 }
 
