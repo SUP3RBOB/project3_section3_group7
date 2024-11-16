@@ -3,8 +3,9 @@
 const float EARTH_GRAVITY = 6.67430e-11f;
 
 Simulation::Simulation() {
+    const float EARTH_MASS = 5.972e24f;
     spaceship = new Spaceship();
-    earth = new Earth("Earth", 0.f, 0.f, 5.972e24f, 6.371e6f);
+    earth = new Earth("Earth", 0.f, 0.f, EARTH_MASS, EARTH_RADIUS);
 }
 
 Simulation::~Simulation() {
@@ -12,11 +13,11 @@ Simulation::~Simulation() {
     delete earth;
 }
 
-Spaceship &Simulation::GetSpaceship() {
+Spaceship& Simulation::GetSpaceship() {
     return (*spaceship);
 }
 
-Earth &Simulation::GetEarth() {
+Earth& Simulation::GetEarth() {
     return (*earth);
 }
 

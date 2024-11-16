@@ -4,5 +4,6 @@
         <file>Images/red light.png</file>
         <file>Images/Steel texture.png</file>
         <file>Images/wood texture.png</file>
+        <file>Images/wood with hole.png</file>
     </qresource>
 </RCC>

@@ -5,6 +5,7 @@
 #include <QVector2D>
 
 const float THRUST_POWER = 5000.f;
+const float EARTH_RADIUS = 6.371e6f;
 
 /// Represents the navigation module of the spcaeship.
 class Navigation : public ISavable {
