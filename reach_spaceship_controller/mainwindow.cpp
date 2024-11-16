@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // Creating objects
     simulation = new Simulation();
+    connect(&simulation->GetSpaceship().GetPower(), &Power::OnPowerActivated, this, &MainWindow::OnPower);
 
     updateTimer = new QTimer();
     connect(updateTimer, &QTimer::timeout, this, &MainWindow::Update);
@@ -33,6 +34,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     spaceshipTrail = QList<QVector2D>();
     spaceshipTrail.append(simulation->GetSpaceship().GetNavigation().Position);
+
+    // Initialize indicator sprites
+    onSprite = QPixmap(":/Images/Images/green light.png");
+    offSprite = QPixmap(":/Images/Images/red light.png");
 }
 
 MainWindow::~MainWindow() {
@@ -96,5 +101,28 @@ void MainWindow::Update() {
     }
 
     repaint();
+}
+
+void MainWindow::OnPower(bool on) {
+    if (on) {
+
+    } else {
+
+    }
+}
+
+void MainWindow::on_TempSlider_valueChanged(int value) {
+    LifeSupport& ls = simulation->GetSpaceship().GetLifeSupport();
+
+    ls.SetTemp(value);
+    ui->TempLabel->display(ls.GetTemp());
+}
+
+
+void MainWindow::on_OxygenSlider_valueChanged(int value) {
+    LifeSupport& ls = simulation->GetSpaceship().GetLifeSupport();
+
+    ls.SetOxygen(value);
+    ui->OxygenLabel->display(ls.GetOxygen());
 }
 

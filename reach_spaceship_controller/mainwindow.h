@@ -26,6 +26,9 @@ private:
     QVector2D pan;
     QList<QVector2D> spaceshipTrail;
 
+    QPixmap onSprite;
+    QPixmap offSprite;
+
     QPoint ToScreenCoordinates(const QVector2D& position);
 
 protected:
@@ -35,5 +38,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_TempSlider_valueChanged(int value);
+    void on_OxygenSlider_valueChanged(int value);
+    void OnPower(bool on);
 };
 #endif // MAINWINDOW_H

@@ -433,7 +433,7 @@ border-radius: 15px;
         background-color: rgb(0, 0, 0);</string>
       </property>
       <property name="digitCount">
-       <number>1</number>
+       <number>3</number>
       </property>
      </widget>
      <widget class="QLabel" name="label_4">
@@ -600,10 +600,12 @@ border-radius: 5px;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(0, 170, 0);
+font: 24pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);
 border-radius: 10px;</string>
       </property>
       <property name="text">
-       <string/>
+       <string>↓</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ThrustClearButton">
@@ -617,10 +619,11 @@ border-radius: 10px;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 10px;</string>
+color: rgb(0, 0, 0);
+border-radius: 10px</string>
       </property>
       <property name="text">
-       <string/>
+       <string>o</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ThrustLeftButton">
@@ -634,10 +637,13 @@ border-radius: 10px;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(0, 0, 255);
-border-radius: 10px;</string>
+font: 24pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);
+border-radius: 10px;
+padding-bottom: 8px;</string>
       </property>
       <property name="text">
-       <string/>
+       <string>←</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ThrustRightButton">
@@ -651,10 +657,13 @@ border-radius: 10px;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 0, 0);
-border-radius: 10px;</string>
+font: 24pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);
+border-radius: 10px;
+padding-bottom: 7px;</string>
       </property>
       <property name="text">
-       <string/>
+       <string>→</string>
       </property>
      </widget>
      <widget class="QPushButton" name="ThrustUpButton">
@@ -668,10 +677,12 @@ border-radius: 10px;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 0);
+font: 24pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);
 border-radius: 10px;</string>
       </property>
       <property name="text">
-       <string/>
+       <string>↑</string>
       </property>
      </widget>
      <widget class="QLCDNumber" name="ThrusterXLabel">
@@ -691,7 +702,7 @@ border-radius: 10px;</string>
 border-radius: 10px;</string>
       </property>
       <property name="digitCount">
-       <number>2</number>
+       <number>1</number>
       </property>
      </widget>
      <widget class="QLCDNumber" name="ThrusterYLabel">
@@ -711,7 +722,7 @@ border-radius: 10px;</string>
 border-radius: 10px;</string>
       </property>
       <property name="digitCount">
-       <number>2</number>
+       <number>1</number>
       </property>
      </widget>
      <widget class="QLabel" name="label_9">
@@ -822,7 +833,7 @@ border-radius: 10px;</string>
 border-radius: 10px;</string>
       </property>
       <property name="digitCount">
-       <number>2</number>
+       <number>4</number>
       </property>
      </widget>
      <widget class="QSlider" name="TempSlider">
