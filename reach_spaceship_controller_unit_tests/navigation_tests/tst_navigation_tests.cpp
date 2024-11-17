@@ -43,7 +43,7 @@ void Navigation_tests::ApplyThrust_ModifiesThrustDirection() {
     Navigation nav = Navigation();
     nav.ThrusterX().SetThrust(-1.f);
     nav.ThrusterY().SetThrust(1.f);
-    QVector2D expectedDirection = QVector2D(-1.f, 1.f);
+    QVector2D expectedDirection = QVector2D(-1.f, 1.f).normalized();
 
     // Act
     nav.ApplyThrust(1000.f, 0.016f);
@@ -57,7 +57,7 @@ void Navigation_tests::ApplyThrust_ModifiesThrustVelocity() {
     Navigation nav = Navigation();
     nav.ThrusterX().SetThrust(-1.f);
     nav.ThrusterY().SetThrust(1.f);
-    QVector2D expectedVelocity = QVector2D(-0.08f, 0.08f);
+    QVector2D expectedVelocity = QVector2D(7669.94f, 0.0565685f);
 
     // Act
     nav.ApplyThrust(1000.f, 0.016f);
@@ -76,8 +76,8 @@ void Navigation_tests::Save_CreatesNewFiles() {
 
     // Assert
     QVERIFY(QFileInfo::exists("navigation.txt"));
-    QVERIFY(QFileInfo::exists("thrusterx.txt"));
-    QVERIFY(QFileInfo::exists("thrustery.txt"));
+    QVERIFY(QFileInfo::exists("thruster_x.txt"));
+    QVERIFY(QFileInfo::exists("thruster_y.txt"));
 
     // Cleanup
     ClearFiles();

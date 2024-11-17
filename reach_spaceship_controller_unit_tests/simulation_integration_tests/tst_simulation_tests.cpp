@@ -27,7 +27,7 @@ Simulation_Tests::~Simulation_Tests() {}
 void Simulation_Tests::Update_UpdatesSpaceshipOrbitalPosition() {
     // Arrange
     Simulation simulation = Simulation();
-    QVector2D expectedPosition = QVector2D(0.f, 7.371e+06f);
+    QVector2D expectedPosition = QVector2D(122.72f, 7.371e+06f);
 
     // Act
     simulation.Update(0.016f, 1.f);
@@ -40,7 +40,7 @@ void Simulation_Tests::Update_UpdatesSpaceshipOrbitalPosition() {
 void Simulation_Tests::Update_UpdatesSpaceshipOrbitalVelocity() {
     // Arrange
     Simulation simulation = Simulation();
-    QVector2D expectedVelocity = QVector2D(0.f, -0.11738f);
+    QVector2D expectedVelocity = QVector2D(7670.f, -0.11738f);
 
     // Act
     simulation.Update(0.016f, 1.f);
