@@ -123,6 +123,25 @@ void MainWindow::Startup() {
     bool lightsAreOn = power.IsOn() && lights.isOn();
     ui->LightsOverlay->setVisible(!lightsAreOn);
     ui->LightsIndicator->setPixmap(lightsAreOn ? onSprite : offSprite);
+
+    // Map planet table UI
+    Map& map = simulation->GetSpaceship().GetMap();
+    Navigation& nav = simulation->GetSpaceship().GetNavigation();
+    QTreeWidgetItem* item = new QTreeWidgetItem();
+    item->setText(0, simulation->GetEarth().GetName());
+
+    QString distance = QString::number(nav.Position.distanceToPoint(simulation->GetEarth().GetPosition()) / 200000000.f) + " AU";
+    item->setText(1, distance);
+    ui->PlanetTable->addTopLevelItem(item);
+
+    for (Planet& planet : map.list) {
+        QTreeWidgetItem* item = new QTreeWidgetItem();
+        item->setText(0, planet.GetName());
+
+        QString distance = QString::number((nav.Position.distanceToPoint(planet.GetPosition())) / 150000000.f) + " AU";
+        item->setText(1, distance);
+        ui->PlanetTable->addTopLevelItem(item);
+    }
 }
 
 // Update every 'frame'
@@ -142,19 +161,11 @@ void MainWindow::OnPower(bool on) {
     Power& power = simulation->GetSpaceship().GetPower();
     Lights& lights = simulation->GetSpaceship().GetLights();
 
-    if (on) {
-        ui->PowerIndicator->setPixmap(onSprite);
-    } else {
-        ui->PowerIndicator->setPixmap(offSprite);
-        lights.turnOff();
-        ui->LightsIndicator->setPixmap(offSprite);
-        ui->LightsOverlay->setVisible(true);
-    }
-
     ui->TempSlider->setEnabled(on);
     ui->OxygenSlider->setEnabled(on);
     ui->LightsButton->setEnabled(on);
     ui->ShipMessagesToggleButton->setEnabled(on);
+    ui->LightsOverlay->setVisible(!(on && lights.isOn()));
 }
 
 void MainWindow::on_TempSlider_valueChanged(int value) {
