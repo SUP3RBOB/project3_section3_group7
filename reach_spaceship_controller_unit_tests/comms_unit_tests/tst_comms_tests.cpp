@@ -38,7 +38,7 @@ void Comms_Tests::ReceiveRandomMessage_AddsMessageToReceivedList() {
 void Comms_Tests::ReceiveRandomMessage_EmitsMessageReceivedSignal() {
     // Arrange
     Communication comms = Communication();
-    connect(&comms, &Communication::OnMessageReceived, this, &Comms_Tests::OnReceivedMessage);
+    connect(&comms, &Communication::OnMessageReceived, this, &Comms_Tests::ReceivedMessage);
 
     // Act
     comms.ReceiveRandomMessage();
