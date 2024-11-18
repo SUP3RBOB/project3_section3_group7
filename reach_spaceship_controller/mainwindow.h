@@ -15,10 +15,14 @@ class MainWindow : public QMainWindow {
 private:
     Q_OBJECT
 
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui;
 
     Simulation* simulation;
+
     QTimer* updateTimer;
+    QTimer* commsTimer;
+    QTimer* navTimer;
+    QTimer* hullTimer;
 
     void Startup();
     void Update();
@@ -46,5 +50,15 @@ private slots:
     void OnPower(bool on);
     void on_LightsButton_clicked();
     void on_PowerButton_clicked();
+    void ReceiveRandomMessage();
+    void RandomMessageReceived(QString message);
+    void on_ShipMessagesToggleButton_clicked();
+    void on_ThrustUpButton_clicked();
+    void on_ThrustRightButton_clicked();
+    void on_ThrustDownButton_clicked();
+    void on_ThrustLeftButton_clicked();
+    void on_ThrustClearButton_clicked();
+    void UpdateHull();
+    void SaveNavigation();
 };
 #endif // MAINWINDOW_H

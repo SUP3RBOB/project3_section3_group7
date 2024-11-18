@@ -5,12 +5,14 @@
 using namespace Qt;
 
 const float TICK_RATE = 0.016f;
-const float TIMER_RATE = 16.f;
 const float SIMULATION_SPEED = 500.f;
 const int TRAIL_LENGTH = 1000;
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+
+    // Reshuffle seed
+    srand(time(NULL));
 
     // Window setup
     setWindowTitle("Reach Spaceship Controller");
@@ -22,7 +24,23 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     updateTimer = new QTimer();
     connect(updateTimer, &QTimer::timeout, this, &MainWindow::Update);
-    updateTimer->start(TIMER_RATE);
+    const float UPDATE_TIMER_RATE = 16.f;
+    updateTimer->start(UPDATE_TIMER_RATE);
+
+    commsTimer = new QTimer();
+    connect(commsTimer, &QTimer::timeout, this, &MainWindow::ReceiveRandomMessage);
+    connect(&simulation->GetSpaceship().GetComms(), &Communication::OnMessageReceived, this, &MainWindow::RandomMessageReceived);
+    const float TIME_TO_RECEIVE_MESSAGE = 15000.f;
+    commsTimer->start(TIME_TO_RECEIVE_MESSAGE);
+
+    hullTimer = new QTimer();
+    connect(hullTimer, &QTimer::timeout, this, &MainWindow::UpdateHull);
+    const float HULL_TIME = 9000.f;
+    hullTimer->start(HULL_TIME);
+
+    navTimer = new QTimer();
+    const float NAV_SAVE_TIME = 1000.f;
+    navTimer->start(NAV_SAVE_TIME);
 
     // Paint view setup
     currentScale = 5e-5f;
@@ -33,7 +51,6 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     pan.setY(pan.y() + PAN_YOFFSET);
 
     spaceshipTrail = QList<QVector2D>();
-    spaceshipTrail.append(simulation->GetSpaceship().GetNavigation().Position);
 
     // Initialize indicator sprites
     onSprite = QPixmap(":/Images/Images/green light.png");
@@ -44,6 +61,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 }
 
 MainWindow::~MainWindow() {
+    delete navTimer;
+    delete hullTimer;
+    delete commsTimer;
     delete updateTimer;
     delete simulation;
     delete ui;
@@ -111,13 +131,19 @@ void MainWindow::Startup() {
     Hull& hull = simulation->GetSpaceship().GetHull();
     LifeSupport& ls = simulation->GetSpaceship().GetLifeSupport();
     Lights& lights = simulation->GetSpaceship().GetLights();
+    Communication& comms = simulation->GetSpaceship().GetComms();
 
+
+
+    // Power
     power.SetOn(power.IsOn());
     ui->Hull->display(qRound(hull.GetIntegrity()));
 
+    // Life support
     ui->TempSlider->setValue(qRound(ls.GetTemp()));
     ui->OxygenSlider->setValue(qRound(ls.GetOxygen()));
 
+    // Lights
     ui->LightsOverlay->setAttribute(WA_TransparentForMouseEvents);
 
     bool lightsAreOn = power.IsOn() && lights.isOn();
@@ -142,6 +168,22 @@ void MainWindow::Startup() {
         item->setText(1, distance);
         ui->PlanetTable->addTopLevelItem(item);
     }
+
+    // Comms
+    ui->ShipMessagesToggleButton->setText(comms.CanReceiveMessages() ? "Enabled" : "Disabled");
+    if (comms.MessagesReceived.count() > 0) {
+        for (QString& message : comms.MessagesReceived) {
+            ui->MessagesList->addItem(message);
+        }
+    }
+
+    // Navigation and Thrusters
+    ui->ThrusterXLabel->display(nav.ThrusterX().GetThrust());
+    ui->ThrusterYLabel->display(nav.ThrusterY().GetThrust());
+    spaceshipTrail.append(simulation->GetSpaceship().GetNavigation().Position);
+
+    // Hull
+    ui->Hull->display(qRound(hull.GetIntegrity()));
 }
 
 // Update every 'frame'
@@ -158,13 +200,22 @@ void MainWindow::Update() {
 }
 
 void MainWindow::OnPower(bool on) {
-    Power& power = simulation->GetSpaceship().GetPower();
     Lights& lights = simulation->GetSpaceship().GetLights();
+
+    if (!on) {
+        on_ThrustClearButton_clicked();
+    }
 
     ui->TempSlider->setEnabled(on);
     ui->OxygenSlider->setEnabled(on);
     ui->LightsButton->setEnabled(on);
     ui->ShipMessagesToggleButton->setEnabled(on);
+    ui->ThrustDownButton->setEnabled(on);
+    ui->ThrustUpButton->setEnabled(on);
+    ui->ThrustLeftButton->setEnabled(on);
+    ui->ThrustRightButton->setEnabled(on);
+    ui->ThrustClearButton->setEnabled(on);
+    ui->LightsButton->setEnabled(on);
     ui->LightsOverlay->setVisible(!(on && lights.isOn()));
 }
 
@@ -212,5 +263,92 @@ void MainWindow::on_PowerButton_clicked() {
     ui->PowerIndicator->setPixmap(power.IsOn() ? onSprite : offSprite);
 
     power.Save("power.txt");
+}
+
+void MainWindow::ReceiveRandomMessage() {
+    Communication& comms = simulation->GetSpaceship().GetComms();
+    if (comms.CanReceiveMessages()) {
+        comms.ReceiveRandomMessage();
+        comms.Save("comms.txt");
+    }
+}
+
+void MainWindow::RandomMessageReceived(QString message) {
+    ui->MessagesList->addItem(message);
+}
+
+
+void MainWindow::on_ShipMessagesToggleButton_clicked() {
+    Communication& comms = simulation->GetSpaceship().GetComms();
+    comms.ToggleReceiveMessages();
+    ui->ShipMessagesToggleButton->setText(comms.CanReceiveMessages() ? "Enabled" : "Disabled");
+    comms.Save("comms.txt");
+}
+
+
+void MainWindow::on_ThrustUpButton_clicked() {
+    Navigation& nav = simulation->GetSpaceship().GetNavigation();
+    nav.ThrusterY().SetThrust(1.f);
+    nav.ApplyThrust(simulation->GetSpaceship().GetMass(), TICK_RATE);
+    ui->ThrusterYLabel->display(nav.ThrusterY().GetThrust());
+    nav.Save("navigation.txt");
+}
+
+
+void MainWindow::on_ThrustRightButton_clicked() {
+    Navigation& nav = simulation->GetSpaceship().GetNavigation();
+    nav.ThrusterX().SetThrust(1.f);
+    nav.ApplyThrust(simulation->GetSpaceship().GetMass(), TICK_RATE);
+    ui->ThrusterXLabel->display(nav.ThrusterX().GetThrust());
+    nav.Save("navigation.txt");
+}
+
+
+void MainWindow::on_ThrustDownButton_clicked() {
+    Navigation& nav = simulation->GetSpaceship().GetNavigation();
+    nav.ThrusterY().SetThrust(-1.f);
+    nav.ApplyThrust(simulation->GetSpaceship().GetMass(), TICK_RATE);
+    ui->ThrusterYLabel->display(nav.ThrusterY().GetThrust());
+    nav.Save("navigation.txt");
+}
+
+
+void MainWindow::on_ThrustLeftButton_clicked() {
+    Navigation& nav = simulation->GetSpaceship().GetNavigation();
+    nav.ThrusterX().SetThrust(-1.f);
+    nav.ApplyThrust(simulation->GetSpaceship().GetMass(), TICK_RATE);
+    ui->ThrusterXLabel->display(nav.ThrusterX().GetThrust());
+    nav.Save("navigation.txt");
+}
+
+
+void MainWindow::on_ThrustClearButton_clicked() {
+    Navigation& nav = simulation->GetSpaceship().GetNavigation();
+    nav.ThrusterY().SetThrust(0.f);
+    nav.ThrusterX().SetThrust(0.f);
+    nav.ApplyThrust(simulation->GetSpaceship().GetMass(), TICK_RATE);
+    ui->ThrusterXLabel->display(nav.ThrusterX().GetThrust());
+    ui->ThrusterYLabel->display(nav.ThrusterY().GetThrust());
+    nav.Save("navigation.txt");
+}
+
+void MainWindow::UpdateHull() {
+    Hull& hull = simulation->GetSpaceship().GetHull();
+
+    if (hull.GetIntegrity() - 1.f <= 0) {
+        hull.SetIntegrity(hull.GetIntegrity() + 1);
+    } else {
+        int randomNumber = rand() % 2;
+        int num = randomNumber == 1 ? 1 : -1;
+        hull.SetIntegrity(hull.GetIntegrity() + num);
+    }
+
+    ui->Hull->display(qRound(hull.GetIntegrity()));
+    hull.Save("hull.txt");
+}
+
+void MainWindow::SaveNavigation() {
+    Navigation& nav = simulation->GetSpaceship().GetNavigation();
+    nav.Save("navigation.txt");
 }
 

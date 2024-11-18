@@ -1,6 +1,7 @@
 #include "comms.h"
 #include <QFile>
 #include <QTextStream>
+#include <QVariant>
 
 using namespace Qt;
 
@@ -29,6 +30,7 @@ Communication::Communication() : QObject() {
     });
 
     MessagesReceived = QList<QString>();
+    receiveMessages = true;
 }
 
 void Communication::ReceiveRandomMessage() {
@@ -60,6 +62,7 @@ void Communication::Save(QString fileName) {
     }
 
     QTextStream stream = QTextStream(&file);
+    stream << receiveMessages << endl;
     for (QString& message : MessagesReceived) {
         stream << message << endl;
     }
@@ -76,6 +79,7 @@ void Communication::Load(QString fileName) {
     }
 
     QTextStream stream = QTextStream(&file);
+    receiveMessages = QVariant(stream.readLine()).toBool();
     while (!stream.atEnd()) {
         QString message = stream.readLine();
         messagesToReceive.removeOne(message);

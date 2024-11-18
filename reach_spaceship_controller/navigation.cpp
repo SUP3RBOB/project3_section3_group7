@@ -4,9 +4,10 @@
 
 using namespace Qt;
 
+const float INITIAL_XVEL = 7670.f;
+
 Navigation::Navigation() {
     const float INITIAL_YOFFSET = 1000000.f;
-    const float INITIAL_XVEL = 7670.f;
 
     thrusterX = new Thruster();
     thrusterY = new Thruster();
