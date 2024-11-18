@@ -56,13 +56,14 @@ void Communication::Save(QString fileName) {
     QFile file = QFile(fileName);
     file.open(QIODevice::WriteOnly);
 
+    QTextStream stream = QTextStream(&file);
+    stream << receiveMessages << endl;
+
     if (MessagesReceived.count() <= 0) {
         file.close();
         return;
     }
 
-    QTextStream stream = QTextStream(&file);
-    stream << receiveMessages << endl;
     for (QString& message : MessagesReceived) {
         stream << message << endl;
     }
