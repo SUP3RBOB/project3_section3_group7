@@ -18,6 +18,7 @@ private slots:
     void ToggleReceiveMessages_AsTrue_DisablesReceiveMessages();
     void Save_CreatesNewFile();
     void Load_LoadsMessagesIntoList();
+    void Load_LoadsCanReceiveMessagesBoolean();
 };
 
 Comms_Tests::Comms_Tests() {}
@@ -50,6 +51,9 @@ void Comms_Tests::ReceiveRandomMessage_EmitsMessageReceivedSignal() {
 void Comms_Tests::ToggleReceiveMessages_AsFalse_EnablesReceiveMessages() {
     // Arrange
     Communication comms = Communication();
+    if (comms.CanReceiveMessages()) {
+        comms.ToggleReceiveMessages();
+    }
 
     // Act
     comms.ToggleReceiveMessages();
@@ -100,6 +104,25 @@ void Comms_Tests::Load_LoadsMessagesIntoList() {
 
     // Assert
     QVERIFY(comms.MessagesReceived.count() > 0);
+
+    // Cleanup
+    if (QFileInfo::exists("comms.txt")) {
+        QFile::remove("comms.txt");
+    }
+}
+
+void Comms_Tests::Load_LoadsCanReceiveMessagesBoolean() {
+    // Arrange
+    Communication comms = Communication();
+    comms.Save("comms.txt");
+    comms.ToggleReceiveMessages();
+
+    // Act
+    comms.Load("comms.txt");
+
+    // Assert
+
+    QVERIFY(comms.CanReceiveMessages());
 
     // Cleanup
     if (QFileInfo::exists("comms.txt")) {

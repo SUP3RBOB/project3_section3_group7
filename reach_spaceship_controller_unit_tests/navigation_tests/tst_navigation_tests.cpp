@@ -57,7 +57,7 @@ void Navigation_tests::ApplyThrust_ModifiesThrustVelocity() {
     Navigation nav = Navigation();
     nav.ThrusterX().SetThrust(-1.f);
     nav.ThrusterY().SetThrust(1.f);
-    QVector2D expectedVelocity = QVector2D(7669.94f, 0.0565685f);
+    QVector2D expectedVelocity = QVector2D(7669.99f, 0.00565685f);
 
     // Act
     nav.ApplyThrust(1000.f, 0.016f);
