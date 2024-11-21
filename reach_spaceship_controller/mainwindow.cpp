@@ -39,6 +39,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     hullTimer->start(HULL_TIME);
 
     navTimer = new QTimer();
+    connect(navTimer, &QTimer::timeout, this, &MainWindow::SaveNavigation);
+    connect(navTimer, &QTimer::timeout, this, &MainWindow::UpdateMap);
     const float NAV_SAVE_TIME = 1000.f;
     navTimer->start(NAV_SAVE_TIME);
 
@@ -71,6 +73,26 @@ MainWindow::~MainWindow() {
 
 bool MainWindow::IsPowerOn() {
     return simulation->GetSpaceship().GetPower().IsOn();
+}
+
+void MainWindow::UpdateMap() {
+    Map& map = simulation->GetSpaceship().GetMap();
+    Navigation& nav = simulation->GetSpaceship().GetNavigation();
+
+    QTreeWidgetItem* item = ui->PlanetTable->topLevelItem(0);
+    item->setText(0, simulation->GetEarth().GetName());
+
+    QString distance = QString::number(nav.Position.distanceToPoint(simulation->GetEarth().GetPosition()) / 200000000.f) + " AU";
+    item->setText(1, distance);
+
+    for (int i = 0; i < map.list.count(); i++) {
+        Planet& planet = map.list[i];
+        QTreeWidgetItem* item = ui->PlanetTable->topLevelItem(i+1);
+        item->setText(0, planet.GetName());
+
+        QString distance = QString::number((nav.Position.distanceToPoint(planet.GetPosition())) / 150000000.f) + " AU";
+        item->setText(1, distance);
+    }
 }
 
 // Apply object coordinates with the pan and scale
@@ -133,8 +155,6 @@ void MainWindow::Startup() {
     Lights& lights = simulation->GetSpaceship().GetLights();
     Communication& comms = simulation->GetSpaceship().GetComms();
 
-
-
     // Power
     power.SetOn(power.IsOn());
     ui->Hull->display(qRound(hull.GetIntegrity()));
@@ -171,6 +191,9 @@ void MainWindow::Startup() {
 
     // Comms
     ui->ShipMessagesToggleButton->setText(comms.CanReceiveMessages() ? "Enabled" : "Disabled");
+    QString style = "color: rgb(0, 0, 0); border-radius: 10px; ";
+    style += comms.CanReceiveMessages() ? "background-color: rgb(0, 170, 0);" : "background-color: rgb(170, 0, 0);";
+    ui->ShipMessagesToggleButton->setStyleSheet(style);
     if (comms.MessagesReceived.count() > 0) {
         for (QString& message : comms.MessagesReceived) {
             ui->MessagesList->addItem(message);
@@ -206,6 +229,7 @@ void MainWindow::OnPower(bool on) {
         on_ThrustClearButton_clicked();
     }
 
+    ui->PowerIndicator->setPixmap(on ? onSprite : offSprite);
     ui->TempSlider->setEnabled(on);
     ui->OxygenSlider->setEnabled(on);
     ui->LightsButton->setEnabled(on);
@@ -260,7 +284,6 @@ void MainWindow::on_PowerButton_clicked() {
     Power& power = simulation->GetSpaceship().GetPower();
 
     power.SetOn(!power.IsOn());
-    ui->PowerIndicator->setPixmap(power.IsOn() ? onSprite : offSprite);
 
     power.Save("power.txt");
 }
@@ -282,6 +305,9 @@ void MainWindow::on_ShipMessagesToggleButton_clicked() {
     Communication& comms = simulation->GetSpaceship().GetComms();
     comms.ToggleReceiveMessages();
     ui->ShipMessagesToggleButton->setText(comms.CanReceiveMessages() ? "Enabled" : "Disabled");
+    QString style = "color: rgb(0, 0, 0); border-radius: 10px; ";
+    style += comms.CanReceiveMessages() ? "background-color: rgb(0, 170, 0);" : "background-color: rgb(170, 0, 0);";
+    ui->ShipMessagesToggleButton->setStyleSheet(style);
     comms.Save("comms.txt");
 }
 

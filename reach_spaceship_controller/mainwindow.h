@@ -36,6 +36,7 @@ private:
 
     QPoint ToScreenCoordinates(const QVector2D& position);
     bool IsPowerOn();
+    void UpdateMap();
 
 protected:
     void paintEvent(QPaintEvent *event) override;
