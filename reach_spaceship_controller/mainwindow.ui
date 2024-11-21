@@ -315,7 +315,6 @@ border-radius: 15px;</string>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(0, 170, 0);
 color: rgb(0, 0, 0);
-alternate-background-color: rgb(170, 0, 0);
 border-radius: 10px</string>
      </property>
      <property name="text">
@@ -1086,7 +1085,7 @@ color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>1280</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>
