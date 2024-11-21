@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QPainter>
+#include <QKeyEvent>
+#include <QFile>
+#include <QApplication>
+#include <QProcess>
 
 using namespace Qt;
 
@@ -104,6 +108,15 @@ QPoint MainWindow::ToScreenCoordinates(const QVector2D& position) {
     int x = static_cast<int>(width() / 2 + (position.x() + offsetX) * currentScale);
     int y = static_cast<int>(height() / 2 - (position.y() + offsetY) * currentScale);
     return QPoint(x, y);
+}
+
+// For resetting all saves and restarting the application
+void MainWindow::keyPressEvent(QKeyEvent* event) {
+    if (event->key() == Key_Backspace) {
+        DeleteModuleSaves();
+        qApp->quit();
+        QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
+    }
 }
 
 // Draw orbit view
@@ -378,3 +391,32 @@ void MainWindow::SaveNavigation() {
     nav.Save("navigation.txt");
 }
 
+void MainWindow::DeleteModuleSaves() {
+    if (QFile::exists("navigation.txt")) {
+        QFile::remove("navigation.txt");
+    }
+
+    if (QFile::exists("power.txt")) {
+        QFile::remove("power.txt");
+    }
+
+    if (QFile::exists("lights.txt")) {
+        QFile::remove("lights.txt");
+    }
+
+    if (QFile::exists("comms.txt")) {
+        QFile::remove("comms.txt");
+    }
+
+    if (QFile::exists("lifesupport.txt")) {
+        QFile::remove("lifesupport.txt");
+    }
+
+    if (QFile::exists("thruster_x.txt")) {
+        QFile::remove("thruster_x.txt");
+    }
+
+    if (QFile::exists("thruster_y.txt")) {
+        QFile::remove("thruster_y.txt");
+    }
+}
