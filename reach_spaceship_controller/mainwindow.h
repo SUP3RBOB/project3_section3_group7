@@ -37,9 +37,11 @@ private:
     QPoint ToScreenCoordinates(const QVector2D& position);
     bool IsPowerOn();
     void UpdateMap();
+    void DeleteModuleSaves();
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
+    virtual void paintEvent(QPaintEvent* event) override;
+    virtual void keyPressEvent(QKeyEvent* event) override;
 
 public:
     MainWindow(QWidget *parent = nullptr);
