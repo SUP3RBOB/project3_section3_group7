@@ -80,6 +80,10 @@ bool MainWindow::IsPowerOn() {
 }
 
 void MainWindow::UpdateMap() {
+    if (!IsPowerOn()) {
+        return;
+    }
+
     Map& map = simulation->GetSpaceship().GetMap();
     Navigation& nav = simulation->GetSpaceship().GetNavigation();
 
