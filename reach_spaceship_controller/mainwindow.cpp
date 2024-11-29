@@ -423,4 +423,8 @@ void MainWindow::DeleteModuleSaves() {
     if (QFile::exists("thruster_y.txt")) {
         QFile::remove("thruster_y.txt");
     }
+
+    if (QFile::exists("hull.txt")) {
+        QFile::remove("hull.txt");
+    }
 }
